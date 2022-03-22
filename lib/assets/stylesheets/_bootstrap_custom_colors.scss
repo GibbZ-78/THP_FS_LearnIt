@@ -1,0 +1,22 @@
+// Declare somes custom colors variables
+
+$motiv-blue: rgba(6, 38, 102, 1);
+$carnelian: rgba(186, 24, 27, 1);
+
+// Create custom colors map
+$new-theme-colors: (
+  "primary": $motiv-blue,
+  "ruby-red": $carnelian
+);
+
+
+// Used to apply updates
+
+$theme-colors: map-merge($theme-colors, $new-theme-colors);
+
+// Since 5.1.0 you must add the following to add the new colors to the mixin and benefits 
+// of the new colors utilities (--bs-text-opacity)
+$theme-colors-rgb: map-loop($theme-colors, to-rgb, "$value");
+$utilities-colors: map-merge($utilities-colors, $theme-colors-rgb);
+$utilities-text-colors: map-loop($utilities-colors, rgba-css-var, "$key", "text");
+$utilities-bg-colors: map-loop($utilities-colors, rgba-css-var, "$key", "bg");
