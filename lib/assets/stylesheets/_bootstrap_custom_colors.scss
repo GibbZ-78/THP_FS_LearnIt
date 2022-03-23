@@ -1,6 +1,6 @@
 // Declare somes custom colors variables
 
-$midnight-express: rgba(38, 41, 54, 1);
+$midnight_express: rgba(38, 41, 54, 1);
 $deep_blue: rgba(48, 56, 110, 1);
 $blue_violet: rgba(76, 88, 187, 1);
 $orange_mecanic: rgba(242, 145, 56, 1);
@@ -9,7 +9,7 @@ $light_pulpit: rgba(254, 246, 237, 1);
 
 // Create custom colors map
 $new-theme-colors: (
-  "primary": $midnight-express,
+  "primary": $midnight_express,
   "secondary": $orange_mecanic,
   "deep_blue": $deep_blue,
   "neon_carrot": $neon_carrot,
