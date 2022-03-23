@@ -1,2 +1,111 @@
-<h1 class="text-primary">StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<!-- PARTIE BANNER -->
+
+<%= render "layouts/partials/hero_banner_index" %>
+
+
+<!-- PARTIE PRESENTATION -->
+<!-- A réintégrer dans un fichier CSS spécifique -->
+
+<style>
+    .orange_underline{
+        text-decoration-line : underline;
+        text-decoration-color : rgba(242, 145, 56, 1);
+    }
+</style> 
+
+
+<section class="row justify-content-between mb-5 p-3">
+  <div class="col-12">
+        <h1 class="orange_underline">Learn’it, en quelques mots</h1>
+        <br>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis netus quam massa in augue. Ac massa lectus posuere ornare feugiat consectetur pharetra, faucibus felis. Ut tristique amet arcu turpis bibendum. Lorem vulputate dolor quam placerat vivamus mi, vulputate nam.
+        Sit urna non tellus congue. Quam vitae aliquam quis egestas nisl, lorem odio. At non phasellus lacus, elit in. Laoreet blandit nec ac sed ac eget donec proin. Phasellus venenatis, vestibulum, ut turpis sit tristique. Montes cras arcu feugiat. 
+        </p>
+  </div>
+</section>
+
+
+<!-- PARTIE CURSUS -->
+
+<section class="row justify-content-between mb-5 p-3">
+  <div class="container">
+        <h1 class="orange_underline">Nos cursus</h1>
+         <br>
+        <div class="row justify-content-between">
+
+
+                <div class="card col-3 mx-5">
+            
+                    <%= image_tag("banner_index", alt:"...", class:"card-img-top", width:"100%") %>
+                    <div class="card-body">
+                        <h5 class="card-title">Développement web</h5>
+                        <p class="card-text">Un cursus de X modules pour devenir développeur Web et Mobile.</p>
+                        <p class="card-text"><small class="text-muted">Plus d'infos</small></p>
+                        <br>
+                        <br>
+                        <p class="card-text"><small class="text-muted">Prochaine session dans 10 jours</small></p>
+                    </div>
+                </div>
+
+                <div class="card col-3 mx-5">
+                    <%= image_tag("banner_index", alt:"...", class:"card-img-top", width:"100%") %>
+                    <div class="card-body">
+                        <h5 class="card-title">Ressources humaines</h5>
+                        <p class="card-text">Un cursus de X modules pour acquérir les fondamentaux de la gestion des RH en entreprise.</p>
+                        <p class="card-text"><small class="text-muted">Plus d'infos</small></p>
+                        <br>
+                        <p class="card-text"><small class="text-muted">Rejoindre</small></p>
+                    </div>
+                </div>
+
+                <div class="card col-3 mx-5">
+                    <%= image_tag("banner_index", alt:"...", class:"card-img-top", width:"100%") %>
+                    <div class="card-body">
+                        <h5 class="card-title">Private equity</h5>
+                        <p class="card-text">Un cursus de X modules destiné aux profils financiers, pour maitriser les rouages d’un capital investissement.</p>
+                        <p class="card-text"><small class="text-muted">Plus d'infos</small></p>
+                        <br>
+                        <p class="card-text"><small class="text-muted">Découvrir</small></p>
+                    </div>
+                </div>
+
+        </div>
+        <br>
+        <p><a href="">Voir tout</a></p>
+    </div>
+</section>
+
+
+<!-- PARTIE TARIF -->
+
+<!-- <section class="row justify-content-between mb-1 p-2">
+    <div class="container">
+        <div class="card bg-light">
+        </div>
+    </div>
+-->
+    
+<style>
+.carre {
+    width  : 200px;
+    height : 200px;
+    background : black;
+  }
+</style>
+
+<section class="row justify-content-between mb-5 bg-secondary">
+    <div class="col-4 mx-5 my-5">
+        <p class="h1 text-light">Chez LearnIt, aucune mauvaise surprise !</p>
+        <p class="h2 text-light">Un forfait mensuel pour toutes nos ressources</p>
+    </div>
+
+    <div class="col-4 mx-5 my-5">
+        <div class="carre">
+
+        </div>
+    </div>
+    
+</section>
+
+
+
