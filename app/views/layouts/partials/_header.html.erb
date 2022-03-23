@@ -30,6 +30,7 @@
           </ul>
         </div>
         
+        <!-- Search input & button -->
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <form class="d-flex">
@@ -41,10 +42,12 @@
           </ul>
         </div>
         
+        <!-- Right part of the navbar:  -->
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <% if !user_signed_in? %>
             <li class="nav-item dropstart">
-              <a class="btn btn-sm btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-sm btn-secondary dropdown-toggle mx-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-box-arrow-in-right fs-5"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -56,18 +59,18 @@
                 </li>
               </ul>
             </li>
-            <% if user_signed_in? %>
+          <% else %>
             <li>
-              <%= link_to destroy_user_session_path, class:"btn btn-sm btn-danger", method:"delete" do %>
+              <%= link_to destroy_user_session_path, class:"btn btn-sm btn-danger mx-2", method:"delete" do %>
                 <i class="bi bi-box-arrow-left fs-5"></i>
               <% end %>
             </li>
             <li>
-              <%= link_to edit_user_registration_path, class:"btn btn-sm btn-primary", method:"get" do %>
+              <%= link_to edit_user_registration_path, class:"btn btn-sm btn-primary mx-2", method:"get" do %>
                 <i class="bi bi-person-square fs-5"></i>
               <% end %>
             </li>
-            <% end %>
+          <% end %>
           </ul>
         </div>
       
