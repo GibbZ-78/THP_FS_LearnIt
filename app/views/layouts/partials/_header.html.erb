@@ -50,8 +50,8 @@
         <div class="me-5">
           <ul class="navbar-nav">
             <form class="d-flex">
-              <input class="form-control rounded-pill me-n3" type="search" placeholder="Rechercher..." aria-label="Search">
-              <button class="btn btn-secondary rounded-circle ms-n4" type="submit">
+              <input class="form-control rounded-pill me-n3" id="q" type="search" placeholder="Rechercher..." aria-label="Search">
+              <button class="btn btn-secondary rounded-circle ms-n4" type="submit" onclick="javascript:alert('Aucune occurence de \''+document.getElementById('q').value+'\' trouvée, désolé.');">
                 <i class="bi bi-search fs-5"></i>
               </button>
             </form>
