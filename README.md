@@ -11,3 +11,5 @@
   rails db:create
 * Database initialization
   rails db:migrate
+
+JBV : update test on March, 23 2022 at 11:22 AM (Paris time)
