@@ -1,0 +1,78 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      
+      <a class="navbar-brand" href="#">
+        <%= image_tag("learnit_logo.png", height:"50px", alt:"LearnIt! - Logo of THE peer-learning web site that condensates the best of all worlds!") %>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <%= link_to("Cursus",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "Themes > Modules > Courses" top page URI -->
+            </li>
+            <li class="nav-item">
+              <%= link_to("Tarifs",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "Prices" page URI -->
+            </li>
+            <li class="nav-item">
+              <%= link_to("A propos de...",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "About" page URI -->
+            </li>
+            <li class="nav-item">
+              <%= link_to("Contact",root_path, class:"nav-link", method:"get") %>  <!-- Once coded, update link with the "Contact" page URI -->
+            </li>
+            <li>
+          </ul>
+        </div>
+        
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
+              <button class="btn btn-sm btn-outline-secondary" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+          </ul>
+        </div>
+        
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item dropstart">
+              <a class="btn btn-sm btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <%= link_to("Sign-in",new_user_session_path, class:"dropdown-item", method:"get") %>
+                </li>
+                <li>
+                  <%= link_to("Sign-up",new_user_registration_path, class:"dropdown-item", method:"get") %>
+                </li>
+              </ul>
+            </li>
+            <% if user_signed_in? %>
+            <li>
+              <%= link_to destroy_user_session_path, class:"btn btn-sm btn-danger", method:"delete" do %>
+                <i class="bi bi-box-arrow-left fs-5"></i>
+              <% end %>
+            </li>
+            <li>
+              <%= link_to edit_user_registration_path, class:"btn btn-sm btn-primary", method:"get" do %>
+                <i class="bi bi-person-square fs-5"></i>
+              <% end %>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      
+      </div>
+
+    </div>
+  </nav>
+</header>
