@@ -22,16 +22,24 @@
         <div class="ms-5">
           <ul class="navbar-nav">
             <li class="nav-item mx-2">
-              <%= link_to("Cursus",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "Themes > Modules > Courses" top page URI -->
+              <%= link_to(root_path, class:"nav-link", method:"get") do %> <!-- Once coded, update link with the "Themes > Modules > Courses" top page URI -->
+                <i class="bi bi-mortarboard-fill fs-5"> Cursus</i>
+              <% end%>
             </li>
             <li class="nav-item mx-2">
-              <%= link_to("Tarifs",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "Prices" page URI -->
+              <%= link_to(root_path, class:"nav-link", method:"get") do %> <!-- Once coded, update link with the "Prices" page URI -->
+                <i class="bi bi-piggy-bank-fill fs-5"> Tarifs</i>
+              <% end %>
             </li>
             <li class="nav-item mx-2">
-              <%= link_to("A propos de...",root_path, class:"nav-link", method:"get") %> <!-- Once coded, update link with the "About" page URI -->
+              <%= link_to(root_path, class:"nav-link", method:"get") do%> <!-- Once coded, update link with the "About" page URI -->
+                <i class="bi bi-info-circle-fill fs-5"> A propos de...</i>
+              <% end %>
             </li>
             <li class="nav-item mx-2">
-              <%= link_to("Contact",root_path, class:"nav-link", method:"get") %>  <!-- Once coded, update link with the "Contact" page URI -->
+              <%= link_to(root_path, class:"nav-link", method:"get") do %>  <!-- Once coded, update link with the "Contact" page URI -->
+                <i class="bi bi-send-fill fs-5"> Contact</i>
+              <% end %>
             </li>
             <li>
           </ul>
@@ -39,12 +47,12 @@
         <!-- END ~ Main menu options and links to static pages -->
         
         <!-- BEGIN ~ Search input & button -->
-        <div class="mx-5">
+        <div class="me-5">
           <ul class="navbar-nav">
             <form class="d-flex">
               <input class="form-control rounded-pill me-n3" type="search" placeholder="Rechercher..." aria-label="Search">
               <button class="btn btn-secondary rounded-circle ms-n4" type="submit">
-                <i class="bi bi-search"></i>
+                <i class="bi bi-search fs-5"></i>
               </button>
             </form>
           </ul>
@@ -52,12 +60,12 @@
         <!-- END ~ Search input & button -->
         
         <!-- BEGIN ~ Right part of the navbar: display changes depending of current user connection status  -->
-        <div class="">
+        <div class="ms-5">
           <ul class="navbar-nav">
           <!-- If user is connected, then display "log out" and "go to profile" buttons -->
           <% if !user_signed_in? %>
             <li class="nav-item dropstart">
-              <a class="btn btn-secondary rounded-pill dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="btn btn-secondary rounded-circle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="bi bi-box-arrow-in-right fs-5"></i>
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -72,12 +80,12 @@
           <!-- If user is NOT connected, then display the "log in" (door) button with its dropdown items "sign-in" and "sign-up" -->
           <% else %>
             <li>
-              <%= link_to destroy_user_session_path, class:"btn btn-danger rounded-circle mx-2", method:"delete" do %>
+              <%= link_to(destroy_user_session_path, class:"btn btn-danger rounded-circle mx-2", method:"delete") do %>
                 <i class="bi bi-box-arrow-left fs-5"></i>
               <% end %>
             </li>
             <li>
-              <%= link_to edit_user_registration_path, class:"btn btn-primary rounded-circle ms-2 me-3", method:"get" do %>
+              <%= link_to(edit_user_registration_path, class:"btn btn-primary rounded-circle ms-2 me-3", method:"get") do %>
                 <i class="bi bi-person-square fs-5"></i>
               <% end %>
             </li>
