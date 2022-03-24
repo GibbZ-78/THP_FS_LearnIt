@@ -16,35 +16,35 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
   enable_extension "plpgsql"
 
   create_table "chapters", force: :cascade do |t|
-    t.bigint "theme_id"
     t.string "title"
     t.text "content"
+    t.bigint "theme_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["theme_id"], name: "index_chapters_on_theme_id"
   end
 
   create_table "courses", force: :cascade do |t|
-    t.bigint "chapter_id"
     t.string "title"
     t.text "content"
+    t.bigint "chapter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chapter_id"], name: "index_courses_on_chapter_id"
   end
 
   create_table "question_answers", force: :cascade do |t|
-    t.bigint "quiz_id"
     t.string "question"
     t.string "correct_answer"
+    t.bigint "quiz_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quiz_id"], name: "index_question_answers_on_quiz_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
-    t.bigint "course_id"
     t.string "title"
+    t.bigint "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_quizzes_on_course_id"
