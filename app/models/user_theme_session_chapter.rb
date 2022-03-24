@@ -1,0 +1,2 @@
+class UserThemeSessionChapter < ApplicationRecord
+end
