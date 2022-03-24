@@ -57,7 +57,36 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+####################################################
+#  Gems below are specifically needed by LEARNIT!  #
+####################################################
+
 gem "bootstrap", "~> 5.1"
 gem "jquery-rails", "~> 4.4"
 
 gem "devise", "~> 4.8"
+
+# Faker - Populate app with tangible (yet fake) data
+gem "faker", :git => "https://github.com/faker-ruby/faker.git", :branch => "master"
+
+# Database Cleaner - Allow to clean (PostgreSQL) tables and reinitialize IDs counters before (re)seeding
+gem 'database_cleaner'
+
+# Stripe - Adding payment features through their dedicated vendor API
+gem "stripe"
+
+# for DEV & TEST environment only...
+group :development, :test do
+  
+  # Better Errors - Enables more accurate, targeted and nicely displayed errors
+  gem "better_errors"
+  gem "binding_of_caller"
+  
+  # DotEnv - Offer to manage ENV variables via a dedicated ".env" file
+  # NB: in production mode, ENV vars will be stored by Heroku directly
+  gem "dotenv-rails"
+
+end
+########################################
+#  End of LEARNIT! specific gems' list #
+########################################
