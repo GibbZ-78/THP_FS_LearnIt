@@ -84,11 +84,6 @@ ActiveRecord::Schema.define(version: 2022_03_24_182556) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "user_theme_session_chapter_courses", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "user_theme_session_chapters", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
