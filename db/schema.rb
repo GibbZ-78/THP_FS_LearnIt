@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_150622) do
+ActiveRecord::Schema.define(version: 2022_03_24_151040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,11 @@ ActiveRecord::Schema.define(version: 2022_03_24_150622) do
   create_table "sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_sessions_on_theme_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -109,4 +114,5 @@ ActiveRecord::Schema.define(version: 2022_03_24_150622) do
   end
 
   add_foreign_key "memberships", "users"
+  add_foreign_key "sessions", "themes"
 end
