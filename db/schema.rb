@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_151504) do
+ActiveRecord::Schema.define(version: 2022_03_24_152701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,10 +115,16 @@ ActiveRecord::Schema.define(version: 2022_03_24_151504) do
   create_table "users_groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.index ["group_id"], name: "index_users_groups_on_group_id"
+    t.index ["user_id"], name: "index_users_groups_on_user_id"
   end
 
   add_foreign_key "groups", "sessions"
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "sessions", "themes"
+  add_foreign_key "users_groups", "groups"
+  add_foreign_key "users_groups", "users"
 end
