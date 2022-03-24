@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Learnit</title>
+    <title>LearnIt!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
   </head>
-
-  <body>
-    <main class="container-fluid">
+  <body>  
+    <%= render("layouts/partials/header") %>  <!-- Including the "header" partial, i.e. a sticky navbar with "Learn It!" logo -->
+    
+    <main class="container-fluid">            <!-- Adding a "main" container taking all the width of the page -->
       <%= yield %>
     </main>
+    
+    <%= render("layouts/partials/footer") %>  <!-- Including the "footer" partial -->
   </body>
 </html>
