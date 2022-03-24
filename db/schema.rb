@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_152841) do
+ActiveRecord::Schema.define(version: 2022_03_24_150622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,19 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["chapter_id"], name: "index_courses_on_chapter_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.datetime "subscription_date"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "question_answers", force: :cascade do |t|
     t.string "question"
     t.string "correct_answer"
@@ -50,9 +63,29 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["course_id"], name: "index_quizzes_on_course_id"
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_theme_session_chapter_courses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_theme_session_chapters", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_theme_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,4 +103,10 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "memberships", "users"
 end
