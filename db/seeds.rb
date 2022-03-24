@@ -259,6 +259,7 @@ my_course = Course.find_by(title:"Ruby - I - Introduction")
 Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
 puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
 my_quiz = Quiz.last
+
 QuestionAnswer.create(question: "A. Où et quand est apparu le langage Ruby ?\n1.Au Japon en 1995\n2.Aux USA, dès 1996\n3.En France, en 1998 (Et 1... Et 2... Et 3...0!)\n4.Au Boultikistan, dès l'an 2 A.C.", 
                       correct_answer:"1",
                       quiz_id: my_quiz.id)
@@ -277,6 +278,7 @@ my_course = Course.find_by(title:"Ruby - II - Les types de données")
 Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
 puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
 my_quiz = Quiz.last
+
 QuestionAnswer.create(question: "A. De ces types de données, lequel n'existe pas en Ruby ?\n1.Type 'string'\n2.Type 'map'\n3.Type 'integer'\n4.Type 'array'\n5.Type 'float'", 
                       correct_answer:"1",
                       quiz_id: my_quiz.id)
@@ -298,6 +300,8 @@ puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{Questi
 my_course = Course.find_by(title:"Ruby - III - Les méthodes")
 Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
 puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+my_quiz = Quiz.last
+
 QuestionAnswer.create(question: "A. Quel terme est applicable à Ruby ?\n1.Méthodes\n2.Fonctions\n3.Procédures\n4.Routines\n5.Sous-programmes", 
                       correct_answer:"1",
                       quiz_id: my_quiz.id)
@@ -311,6 +315,8 @@ puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{Questi
 my_course = Course.find_by(title:"Ruby - IV - Les classes et objets")
 Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
 puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+my_quiz = Quiz.last
+
 QuestionAnswer.create(question: "A. Quel mot-clé fait référence à l'objet courant en Ruby ?\n1.self\n2.sauf\n3.SIF", 
                       correct_answer:"2",
                       quiz_id: my_quiz.id)
