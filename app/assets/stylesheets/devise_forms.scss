@@ -1,0 +1,19 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@media only screen and (min-width: 768.1px) {
+  .devise_form .col-md-8 {
+    &:hover {
+      & h2 {
+        text-decoration: underline;
+        text-decoration-color: var(--bs-secondary) ;
+        transform: scale(1.1);
+        transition: ease-in 0.5s;
+      }
+    }
+  }
+  .wrapper {
+    height: 20rem;
+  }
+}
