@@ -1,5 +1,5 @@
 class UserThemeSession < ApplicationRecord
-  belongs_to :session
+  belongs_to :season
   belongs_to :user  
-  has_many :user_theme_session_chapters
+  has_many :user_theme_season_chapters
 end

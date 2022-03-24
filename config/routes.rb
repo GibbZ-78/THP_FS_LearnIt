@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :quizes
   resources :question_answers
   resources :groups
-  resources :sessions
+  resources :seasons
   resources :memberships
 
   get 'uikit', to: 'static_pages#uikit'

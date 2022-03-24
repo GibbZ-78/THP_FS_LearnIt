@@ -1,3 +1,3 @@
 class UtscCourse < ApplicationRecord
-  belongs_to :user_theme_session_chapter
+  belongs_to :user_theme_season_chapter
 end
