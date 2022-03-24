@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_165652) do
+ActiveRecord::Schema.define(version: 2022_03_24_182556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +129,14 @@ ActiveRecord::Schema.define(version: 2022_03_24_165652) do
     t.index ["user_id"], name: "index_users_groups_on_user_id"
   end
 
+  create_table "utsc_courses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_theme_session_chapter_id"
+    t.boolean "completed", default: false
+    t.index ["user_theme_session_chapter_id"], name: "index_utsc_courses_on_user_theme_session_chapter_id"
+  end
+
   add_foreign_key "groups", "sessions"
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
@@ -138,4 +146,5 @@ ActiveRecord::Schema.define(version: 2022_03_24_165652) do
   add_foreign_key "user_theme_sessions", "users"
   add_foreign_key "users_groups", "groups"
   add_foreign_key "users_groups", "users"
+  add_foreign_key "utsc_courses", "user_theme_session_chapters"
 end

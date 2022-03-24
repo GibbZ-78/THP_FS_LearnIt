@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class UserThemeSessionChapterCourseTest < ActiveSupport::TestCase
+class UtscCourseTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
