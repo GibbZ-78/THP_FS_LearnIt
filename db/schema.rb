@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_152701) do
+ActiveRecord::Schema.define(version: 2022_03_24_165652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,11 +92,19 @@ ActiveRecord::Schema.define(version: 2022_03_24_152701) do
   create_table "user_theme_session_chapters", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_theme_session_id"
+    t.integer "completion_rate"
+    t.index ["user_theme_session_id"], name: "index_user_theme_session_chapters_on_user_theme_session_id"
   end
 
   create_table "user_theme_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "session_id"
+    t.integer "completion_rate"
+    t.index ["session_id"], name: "index_user_theme_sessions_on_session_id"
+    t.index ["user_id"], name: "index_user_theme_sessions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -125,6 +133,9 @@ ActiveRecord::Schema.define(version: 2022_03_24_152701) do
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "sessions", "themes"
+  add_foreign_key "user_theme_session_chapters", "user_theme_sessions"
+  add_foreign_key "user_theme_sessions", "sessions"
+  add_foreign_key "user_theme_sessions", "users"
   add_foreign_key "users_groups", "groups"
   add_foreign_key "users_groups", "users"
 end
