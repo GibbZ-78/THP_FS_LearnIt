@@ -11,11 +11,11 @@
 # NB: requires the "database_cleaner" gem to be part of the Rails environment
 DatabaseCleaner.clean_with(:truncation)
 
- #####################
-#                     #
+  ###################
+ #                   #
 #  CREATION OF USERS  #
-#                     #
- #####################
+ #                   #
+  ###################
 
 # TO DO: At this stage (03/24/2022 @ 12:23 PM), the "users" table solely contains "Devise mandatory fields": email and password. 
 #        Remember to update the "users" table structure (via a dedicated migration) before launching this richer script!
@@ -68,11 +68,11 @@ User.create(#first_name: "admin",
             role:2)
 puts "  > Finished seeding the one and only 'Admin'"
 
- ##############################################
-#                                              #
-#  CREATION OF THEMES, CHAPTERS, COURSES & CO  #
-#                                              #
- ##############################################
+  ########################################
+ #                                        #
+#  CREATION OF THEMES, CHAPTERS & COURSES  #
+ #                                        #
+  ########################################
 
 # TO DO: At this stage (03/24/2022 @ 3:15 PM), the "themes" do not offer a dedicated image, hence do not have any "image_url" or related field.
 #        In the near future, it'd be nice to add this feature instead of using fake random images to populate the front of our app
@@ -246,8 +246,83 @@ puts "    - Course n°: #{Course.last.id} - title: #{Course.last.title} - conten
 
 puts "  > Finished seeding 'courses'"
 
+  ###########################################
+ #                                           #
+#  CREATION OF QUIZZES + QUESTIONS & ANSWERS  #
+ #                                           #
+  ###########################################
+
+puts "  > Starts seeding 'quizzes' and related 'question_answers'"
+
+# Quizz n°1 avec ses questions
+my_course = Course.find_by(title:"Ruby - I - Introduction")
+Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
+puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+my_quiz = Quiz.last
+QuestionAnswer.create(question: "A. Où et quand est apparu le langage Ruby ?\n1.Au Japon en 1995\n2.Aux USA, dès 1996\n3.En France, en 1998 (Et 1... Et 2... Et 3...0!)\n4.Au Boultikistan, dès l'an 2 A.C.", 
+                      correct_answer:"1",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "B. Comment s'appelle une bibliothèque Ruby ?\n1.Un Diam's\n2.Une 'Gem(me)'\n3.Une 'Pierre de lave'", 
+                      correct_answer:"2",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "C. Quel est le nom du principal framework web basé sur Ruby ?\n1.Django\n2.Symfony\n3.Rails\n4.Je ne sais toujours pas après 3 mosi de THP...", 
+                      correct_answer:"3",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+
+# Quizz n°2 avec ses questions
+my_course = Course.find_by(title:"Ruby - II - Les types de données")
+Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
+puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+my_quiz = Quiz.last
+QuestionAnswer.create(question: "A. De ces types de données, lequel n'existe pas en Ruby ?\n1.Type 'string'\n2.Type 'map'\n3.Type 'integer'\n4.Type 'array'\n5.Type 'float'", 
+                      correct_answer:"1",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "B. Ruby dispose-t-il d'un conversion implicite de types ?\n1.Non\n2.Oui\n3.Je ne sais pas", 
+                      correct_answer:"2",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "C. Ruby offre-t-il des paradigmes 'objet' ?\n1.Non\n2.Para... Quoi ?\n3.Oui\n4.Ca dépend de l'obliquité de la Terre", 
+                      correct_answer:"3",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "D. Ruby peut-il être qualifié de langage faiblement typé ?\n1.Ne se prononce pas\n2.Langage du 3ème type, plutôt, non?\n3.Oui\n4.Non, on est pas chez Javascript, là !", 
+                      correct_answer:"4",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+
+# Quizz n°3 avec ses questions
+my_course = Course.find_by(title:"Ruby - III - Les méthodes")
+Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
+puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+QuestionAnswer.create(question: "A. Quel terme est applicable à Ruby ?\n1.Méthodes\n2.Fonctions\n3.Procédures\n4.Routines\n5.Sous-programmes", 
+                      correct_answer:"1",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+QuestionAnswer.create(question: "B. Un 'return' est-il attendu en fin de toute méthode Ruby ?\n1.Non\n2.Oui\n3.Pour attendre, c'est pas un 'wait(5000)' ?", 
+                      correct_answer:"2",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+
+# Quizz n°4 avec ses questions
+my_course = Course.find_by(title:"Ruby - IV - Les classes et objets")
+Quiz.create(title: "Questionnaire du cours '#{my_course.title}' (n° #{my_course.id})", course_id: my_course.id)
+puts "    - Quizz n°: #{Quiz.last.id} - title: #{Quiz.last.title} - course n°: #{Quiz.last.course_id}"
+QuestionAnswer.create(question: "A. Quel mot-clé fait référence à l'objet courant en Ruby ?\n1.self\n2.sauf\n3.SIF", 
+                      correct_answer:"2",
+                      quiz_id: my_quiz.id)
+puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
+
+puts "  > Finished seeding 'quizzes'"
+
 puts
-puts "SEEDING - This is the end... Thank you for your patience ;-)"
+puts "SEEDING - This is the end... At last !"
+puts
+puts "Thank you for your patience ;-)"
+puts
 
 ######################
 #                    #
