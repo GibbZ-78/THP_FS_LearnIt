@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :themes
   resources :chapters
   resources :courses
-  resources :quizes
+  resources :quizzes
   resources :question_answers
   resources :groups
   resources :seasons
