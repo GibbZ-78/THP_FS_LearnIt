@@ -376,8 +376,18 @@ my_users.each do |user_counter|
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+5..min_season+9))
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+10..min_season+14))
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+15..min_season+19))
+  puts "    - Another 4 'user_seasons' instantiated"
 end
 puts "  > Finished seeding 'user_seasons'"
+
+puts "  > Starts seeding 'user_theme_seasons'"
+UserSeason.all.each do |my_us|
+  my_season = Season.find(my_us.season_id)
+  my_theme = Theme.find(my_season.theme_id)
+  UserThemeSeason.create(user_id:my_us.user_id, season_id: my_us.season_id, theme_id: my_theme.id, completion_rate: rand(0..100)) 
+  puts "    - Another 'user_theme_seasons' created and filled-up"
+end
+puts "  > Finished seeding 'user_theme_seasons'"
 
 puts
 puts "SEEDING - This is the end... At last !"

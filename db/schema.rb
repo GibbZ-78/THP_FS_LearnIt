@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_25_170952) do
+ActiveRecord::Schema.define(version: 2022_03_25_204213) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_170952) do
     t.datetime "updated_at", null: false
     t.bigint "user_theme_season_id"
     t.integer "completion_rate"
+    t.bigint "chapter_id"
+    t.index ["chapter_id"], name: "index_user_theme_season_chapters_on_chapter_id"
     t.index ["user_theme_season_id"], name: "index_user_theme_season_chapters_on_user_theme_season_id"
   end
 
@@ -107,7 +109,9 @@ ActiveRecord::Schema.define(version: 2022_03_25_170952) do
     t.bigint "user_id"
     t.bigint "season_id"
     t.integer "completion_rate"
+    t.bigint "theme_id"
     t.index ["season_id"], name: "index_user_theme_seasons_on_season_id"
+    t.index ["theme_id"], name: "index_user_theme_seasons_on_theme_id"
     t.index ["user_id"], name: "index_user_theme_seasons_on_user_id"
   end
 
@@ -138,6 +142,8 @@ ActiveRecord::Schema.define(version: 2022_03_25_170952) do
     t.datetime "updated_at", null: false
     t.bigint "user_theme_season_chapter_id"
     t.boolean "completed", default: false
+    t.bigint "course_id"
+    t.index ["course_id"], name: "index_utsc_courses_on_course_id"
     t.index ["user_theme_season_chapter_id"], name: "index_utsc_courses_on_user_theme_season_chapter_id"
   end
 
@@ -145,10 +151,13 @@ ActiveRecord::Schema.define(version: 2022_03_25_170952) do
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "seasons", "themes"
+  add_foreign_key "user_theme_season_chapters", "chapters"
   add_foreign_key "user_theme_season_chapters", "user_theme_seasons"
   add_foreign_key "user_theme_seasons", "seasons"
+  add_foreign_key "user_theme_seasons", "themes"
   add_foreign_key "user_theme_seasons", "users"
   add_foreign_key "users_groups", "groups"
   add_foreign_key "users_groups", "users"
+  add_foreign_key "utsc_courses", "courses"
   add_foreign_key "utsc_courses", "user_theme_season_chapters"
 end
