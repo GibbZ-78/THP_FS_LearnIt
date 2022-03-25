@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   resources :static_pages
 
   get 'uikit', to: 'static_pages#uikit'
-  get 'contact', to: 'static_pages#contact'
   get 'about', to: 'static_pages#about'
+  get 'contact', to: 'static_pages#contact'
+  get 'fees', to: 'static_pages#fees'
+
 end
