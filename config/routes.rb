@@ -13,4 +13,8 @@ Rails.application.routes.draw do
   resources :memberships
 
   get 'uikit', to: 'static_pages#uikit'
+  get 'about', to: 'static_pages#about'
+  get 'contact', to: 'static_pages#contact'
+  get 'fees', to: 'static_pages#fees'
+
 end

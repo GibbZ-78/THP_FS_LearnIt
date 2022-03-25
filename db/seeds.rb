@@ -61,7 +61,7 @@ puts "  > Starts seeding unique admin information"
 User.create(#first_name: "admin", 
             #last_name: "admin", 
             password: "THP2022", 
-            email: "learnit_admin@yopmail.com", 
+            email: "learnit_admin@yopmail.com",
             #birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
             #gender: Faker::Gender.binary_type,
             #photo:"photo_admin.jpg",
@@ -323,6 +323,24 @@ QuestionAnswer.create(question: "A. Quel mot-clé fait référence à l'objet co
 puts "      + Question n°: #{QuestionAnswer.last.id} - correct_answer: #{QuestionAnswer.last.correct_answer} - quizz n°: #{QuestionAnswer.last.quiz_id}"
 
 puts "  > Finished seeding 'quizzes'"
+
+puts "  > Starts seeding 'memberships'"
+User.all.each do |my_user|
+  if my_user.role != 2
+    Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between_except(from: 1.year.ago, to: 1.year.from_now, excepted: Date.today))
+    puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
+  end
+end
+puts "  > Finished seeding 'memberships'"
+
+puts "  > Starts seeding 'seasons'"
+
+puts "  > Finished seeding 'seasons'"
+
+name
+start_date
+end_date
+theme
 
 puts
 puts "SEEDING - This is the end... At last !"
