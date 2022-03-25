@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   resources :groups
   resources :seasons
   resources :memberships
+  resources :static_pages
 
   get 'uikit', to: 'static_pages#uikit'
+  get 'contact', to: 'static_pages#contact'
 end

@@ -3,4 +3,6 @@ class StaticPagesController < ApplicationController
   end
   def uikit
   end
+  def contact
+  end
 end
