@@ -13,6 +13,5 @@
  *= require bootstrap_overrides
  *= require bootstrap_icons
  *= require_tree .
- *= require bootstrap_icons
  *= require_self
  */

@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
   root to: 'static_pages#home'
+  
   devise_for :users
-  get 'uikit', to: 'static_pages#uikit'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :themes
   resources :chapters
   resources :courses
   resources :quizzes
   resources :question_answers
+  resources :groups
+  resources :seasons
+  resources :memberships
+
+  get 'uikit', to: 'static_pages#uikit'
 end

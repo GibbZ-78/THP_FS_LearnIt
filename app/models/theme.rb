@@ -1,4 +1,4 @@
 class Theme < ApplicationRecord
-  has_many :sessions
+  has_many :seasons
   has_many :chapters
 end

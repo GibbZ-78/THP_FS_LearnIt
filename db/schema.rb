@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_23_152841) do
+ActiveRecord::Schema.define(version: 2022_03_24_182556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,23 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["chapter_id"], name: "index_courses_on_chapter_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "seasons_id"
+    t.bigint "user_id"
+    t.index ["seasons_id"], name: "index_groups_on_seasons_id"
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.datetime "subscription_date"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "question_answers", force: :cascade do |t|
     t.string "question"
     t.string "correct_answer"
@@ -50,11 +67,39 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["course_id"], name: "index_quizzes_on_course_id"
   end
 
+  create_table "seasons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.bigint "theme_id"
+    t.index ["theme_id"], name: "index_seasons_on_theme_id"
+  end
+
   create_table "themes", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_theme_season_chapters", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_theme_season_id"
+    t.integer "completion_rate"
+    t.index ["user_theme_season_id"], name: "index_user_theme_season_chapters_on_user_theme_season_id"
+  end
+
+  create_table "user_theme_seasons", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.bigint "season_id"
+    t.integer "completion_rate"
+    t.index ["season_id"], name: "index_user_theme_seasons_on_season_id"
+    t.index ["user_id"], name: "index_user_theme_seasons_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -70,4 +115,31 @@ ActiveRecord::Schema.define(version: 2022_03_23_152841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "users_groups", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "group_id"
+    t.bigint "user_id"
+    t.index ["group_id"], name: "index_users_groups_on_group_id"
+    t.index ["user_id"], name: "index_users_groups_on_user_id"
+  end
+
+  create_table "utsc_courses", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_theme_season_chapter_id"
+    t.boolean "completed", default: false
+    t.index ["user_theme_season_chapter_id"], name: "index_utsc_courses_on_user_theme_season_chapter_id"
+  end
+
+  add_foreign_key "groups", "seasons", column: "seasons_id"
+  add_foreign_key "groups", "users"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "seasons", "themes"
+  add_foreign_key "user_theme_season_chapters", "user_theme_seasons"
+  add_foreign_key "user_theme_seasons", "seasons"
+  add_foreign_key "user_theme_seasons", "users"
+  add_foreign_key "users_groups", "groups"
+  add_foreign_key "users_groups", "users"
+  add_foreign_key "utsc_courses", "user_theme_season_chapters"
 end
