@@ -6,8 +6,8 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @course_chapter = @course.chapter #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
-    @course_theme = @course.chapter.theme #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
+    @course_chapter = @course.chapter  #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
+    @course_theme = @course.chapter.theme  #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
   end
 
   #def edit
