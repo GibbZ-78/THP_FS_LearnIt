@@ -1,12 +1,12 @@
-<div>
+<div class="row">
 <!-- Sidebar --> 
-  <aside class="fixed-right">
+  <aside class="col-2">
     <%= render "layouts/partials/side_bar_courses" %>
   </aside>
 
 <!-- Page Content -->
-  <section>
-    <%= render "layouts/partials/course_content" %>
+  <section class="col-10">
+    <%= render "layouts/partials/course_content", course: @course %>
     <%= link_to("Cours suivant",root_path, class:"btn btn-warning") %>
   </section>
 </div>
