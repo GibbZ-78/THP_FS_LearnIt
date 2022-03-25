@@ -1,0 +1,36 @@
+<section>
+  <%= render "layouts/partials/dashboard_banner" %>
+</section>
+
+<h2 class="text-center my-3">Bienvenue sur votre espace <%= "" || current_user.first_name %></h2>
+
+<section class="container mb-5"> <!-- Vos cursus -->
+  <h3 class="mb-5 orange_underline">Vos cursus</h3>
+  <div class="row justify-content-between">
+    <%# Si le current_user fait partie d'une session on affiche la (dernière) card 
+    du theme de cette session ... OU au max les 2 dernières sessions PUIS la card d'ajout %>
+    <%= render 'layouts/partials/theme_card' %>
+    <%= render 'layouts/partials/theme_card' %>
+    <%#fin IF %>
+    <%= render 'layouts/partials/add_theme_card' %>
+    <%#else%>
+    <%# on affiche uniquement la card d'ajout de session qui redirige vers themes %>
+    <%#end%>
+  </div>
+</section>
+
+<section class="container-fluid bg-light_pulpit py-5"> <!-- Vos cursus -->
+  <div class="container">
+    <h3 class="mb-5 orange_underline">Détails</h3>
+    <div class="row d-flex justify-content-between">
+      <%#= pour le theme sélectionné, afficher la liste des chapters  %>
+      <%= render 'layouts/partials/chapter_card' %>
+      <%#= sinon un message "Aucun thème sélectionné" %>
+    </div>
+  </div>
+</section>
+
+
+
+
+
