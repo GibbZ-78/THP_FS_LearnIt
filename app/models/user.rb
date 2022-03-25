@@ -7,6 +7,9 @@ class User < ApplicationRecord
   enum role: [:student, :mentor, :admin]
   after_initialize :set_default_role, :if => :new_record?
 
+  has_many :user_seasons
+  has_many :seasons, through: :user_seasons
+
   private
 
   def set_default_role

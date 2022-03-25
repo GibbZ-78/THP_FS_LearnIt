@@ -327,20 +327,46 @@ puts "  > Finished seeding 'quizzes'"
 puts "  > Starts seeding 'memberships'"
 User.all.each do |my_user|
   if my_user.role != 2
-    Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between_except(from: 1.year.ago, to: 1.year.from_now, excepted: Date.today))
+    Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between(from: 2.years.ago, to: 1.day.ago))
     puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
   end
 end
 puts "  > Finished seeding 'memberships'"
 
 puts "  > Starts seeding 'seasons'"
-
+my_theme = Theme.find_by(title: "Développement Web")
+puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
+Season.create(name: "WebDev - Saison n°1", start_date:"2020-01-01", end_date:"2020-06-01", theme_id:my_theme.id)
+Season.create(name: "WebDev - Saison n°2", start_date:"2020-09-01", end_date:"2021-03-01", theme_id:my_theme.id)
+Season.create(name: "WebDev - Saison n°2", start_date:"2021-01-01", end_date:"2021-06-01", theme_id:my_theme.id)
+Season.create(name: "WebDev - Saison n°4", start_date:"2022-01-10", end_date:"2022-07-06", theme_id:my_theme.id)
+Season.create(name: "WebDev - Saison n°5", start_date:"2022-03-01", end_date:"2022-09-01", theme_id:my_theme.id)
+puts "    - Ended creating 5 seasons for theme '#{my_theme.title}'"
+my_theme = Theme.find_by(title: "Capital-Investissement")
+puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
+Season.create(name: "PE - Saison n°1", start_date:"2020-01-02", end_date:"2020-06-02", theme_id:my_theme.id)
+Season.create(name: "PE - Saison n°2", start_date:"2020-09-02", end_date:"2021-03-02", theme_id:my_theme.id)
+Season.create(name: "PE - Saison n°2", start_date:"2021-01-02", end_date:"2021-06-02", theme_id:my_theme.id)
+Season.create(name: "PE - Saison n°4", start_date:"2022-01-10", end_date:"2022-07-06", theme_id:my_theme.id)
+Season.create(name: "PE - Saison n°5", start_date:"2022-03-02", end_date:"2022-09-02", theme_id:my_theme.id)
+puts "    - Ended creating 5 seasons for theme '#{my_theme.title}'"
+my_theme = Theme.find_by(title: "Ressources Humaines")
+puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
+Season.create(name: "RH - Saison n°1", start_date:"2020-01-03", end_date:"2020-06-03", theme_id:my_theme.id)
+Season.create(name: "RH - Saison n°2", start_date:"2020-09-03", end_date:"2021-03-03", theme_id:my_theme.id)
+Season.create(name: "RH - Saison n°2", start_date:"2021-01-03", end_date:"2021-06-03", theme_id:my_theme.id)
+Season.create(name: "RH - Saison n°4", start_date:"2022-01-10", end_date:"2022-07-06", theme_id:my_theme.id)
+Season.create(name: "RH - Saison n°5", start_date:"2022-03-03", end_date:"2022-09-03", theme_id:my_theme.id)
+puts "    - Ended creating 5 seasons for theme '#{my_theme.title}'"
+my_theme = Theme.find_by(title: "PAO")
+puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
+Season.create(name: "PAO - Saison n°1", start_date:"2020-01-04", end_date:"2020-06-04", theme_id:my_theme.id)
+Season.create(name: "PAO - Saison n°2", start_date:"2020-09-04", end_date:"2021-03-04", theme_id:my_theme.id)
+Season.create(name: "PAO - Saison n°2", start_date:"2021-01-04", end_date:"2021-06-04", theme_id:my_theme.id)
+Season.create(name: "PAO - Saison n°4", start_date:"2022-01-10", end_date:"2022-07-06", theme_id:my_theme.id)
+Season.create(name: "PAO - Saison n°5", start_date:"2022-03-04", end_date:"2022-09-04", theme_id:my_theme.id)
+puts "    - Ended creating 5 seasons for theme '#{my_theme.title}'"
 puts "  > Finished seeding 'seasons'"
-
-name
-start_date
-end_date
-theme
 
 puts
 puts "SEEDING - This is the end... At last !"
