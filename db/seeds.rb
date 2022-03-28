@@ -345,6 +345,10 @@ puts "  > Finished seeding 'quizzes'"
  #                                   #
   ###################################
 
+puts
+puts "SEEDING - Creation of the 'season' logic contents and linking it to our students and mentors"
+puts
+
 puts "  > Starts seeding 'seasons'"
 my_theme = Theme.find_by(title: "Développement Web")
 puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
@@ -385,21 +389,55 @@ my_users = User.where.not(role:2)
 min_season = Season.first.id
 my_users.each do |user_counter|
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season..min_season+4))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+5..min_season+9))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+10..min_season+14))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+15..min_season+19))
-  puts "    - Another 4 'user_seasons' instantiated"
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
 end
 puts "  > Finished seeding 'user_seasons'"
 
-puts "  > Starts seeding 'user_theme_seasons'"
+  ####################################
+ #                                    #
+#  CREATION OF THE 3-LEVEL UTSCC TREE  #
+ #                                    #
+  ####################################
+
+puts
+puts "SEEDING - Creation of the UTSCC 3-level tree to store completion(-rate) of each user on each theme / chapter / course of each season"
+puts
+
+puts "  > Starts seeding 'user_theme_seasons (UTS)'"
 UserSeason.all.each do |my_us|
   my_season = Season.find(my_us.season_id)
   my_theme = Theme.find(my_season.theme_id)
   UserThemeSeason.create(user_id:my_us.user_id, season_id: my_us.season_id, theme_id: my_theme.id, completion_rate: rand(0..100)) 
-  puts "    - Another 'user_theme_seasons' created and filled-up"
+  puts "    - Link 'user_theme_seasons' nr. #{UserThemeSeason.last.id} created between user nr. #{my_us.user_id} (#{User.find(my_us.user_id).email}) and season '#{my_season.name}'"
 end
-puts "  > Finished seeding 'user_theme_seasons'"
+puts "  > Finished seeding 'user_theme_seasons (UTS)'"
+
+puts "  > Starts seeding 'user_theme_seasons_chapters (UTSC)'"
+UserThemeSeason.all.each do |my_uts|
+  my_theme = Theme.find(my_uts.theme_id)
+  my_chapters = Chapter.where(theme_id:my_theme.id)
+  my_chapters.each do |my_chapter|
+    UserThemeSeasonChapter.create(user_theme_season_id:my_uts.id, chapter_id:my_chapter.id, completion_rate:rand(0..100))
+    puts "      + Adding link with 'user_theme_season' nr. #{my_uts.id} and info from chapter '#{my_chapter.title} (#{my_chapter.id})' to 'user_theme_season_chapter' nr. #{UserThemeSeasonChapter.last.id}"
+  end
+end
+puts "  > Finished seeding 'user_theme_season_chapters (UTSC)'"
+
+puts "  > Starts seeding 'utsc_courses'"
+UserThemeSeasonChapter.all.each do |my_utsc|
+  my_courses = Course.where(chapter_id:my_utsc.chapter_id)
+  my_courses.each do |my_course|
+    UtscCourse.create(user_theme_season_chapter_id: my_utsc.id, course_id:my_course.id, completed:Faker::Boolean.boolean)
+    puts "      + Adding link with 'user_theme_season_chapter' nr. #{my_utsc.id} and info from course '#{my_course.title} (#{my_course.id})' to 'utsc_course' nr. #{UtscCourse.last.id}"
+  end
+end
+puts "  > Finished seeding 'utsc_courses'"
 
 puts
 puts "SEEDING - This is the end... At last !"
