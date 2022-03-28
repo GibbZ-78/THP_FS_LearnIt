@@ -31,9 +31,12 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
+
+  config.action_mailer.delivery_method = :smtp        # Will use STMP as default mail sending protocol (see detailed confi below)
+  config.action_mailer.perform_deliveries = true      # Will ACTIVATE ACTUAL mail sending (setinng this to "false" will avoid any mail departure)
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -61,4 +64,14 @@ Rails.application.configure do
 
   # Default URL options added after devise:install
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SENDGRID_LOGIN'],
+    :password => ENV['SENDGRID_PWD'],
+    :domain => 'https://welearnit.herokuapp.com/',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end
