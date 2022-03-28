@@ -439,6 +439,36 @@ UserThemeSeasonChapter.all.each do |my_utsc|
 end
 puts "  > Finished seeding 'utsc_courses'"
 
+  #################################################################
+ #                                                                 #
+#  CREATION OF GROUPS (BY SEASON) AND INTEGRATION OF RELATED USERS  #
+ #                                                                 #
+  #################################################################
+
+puts
+puts "SEEDING - Creation of 2 'groups' within each 'seasons' then randomly attributing related season's user to one of the two group"
+puts
+
+puts "  > Starts seeding 'groups' and related 'users_groups'"
+Season.all.each do |my_season|
+  my_1st_mentor = User.where(role:1).sample
+  my_2nd_mentor = User.where(role:1).sample
+  Group.create(season_id: my_season.id, user_id: my_1st_mentor.id)    # 'user_id' stands for the Mentor ID
+  my_1st_group_id = Group.last.id
+  Group.create(season_id: my_season.id, user_id: my_2nd_mentor.id)    # 'user_id' stands for the Mentor ID
+  my_2nd_group_id = Group.last.id
+  my_user_seasons = UserSeason.where(season_id: my_season.id)
+  my_user_seasons.each do |my_user_season|
+    if rand(1..2) == 1
+      UsersGroup.create(user_id: my_user_season.user_id, group_id: my_1st_group_id)
+    else
+      UsersGroup.create(user_id: my_user_season.user_id, group_id: my_2nd_group_id)
+    end
+    puts "    - User #{User.find(my_user_season.user_id).first_name} #{User.find(my_user_season.user_id).last_name} (#{my_user_season.user_id}) will be in group #{UsersGroup.last.group_id} of season '#{my_season.name}' (#{my_season.id})"
+  end
+end
+puts "  > Finished seeding 'groups' and related 'users_groups'"
+
 puts
 puts "SEEDING - This is the end... At last !"
 puts
