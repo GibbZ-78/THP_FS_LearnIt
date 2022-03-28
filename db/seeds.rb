@@ -26,16 +26,16 @@ puts
 puts "  > Starts seeding 'Students' information"
 5.times do |x|
 	xstr = x+1 < 9 ? "0#{x+1}" : (x+1).to_s 
-  User.create(#first_name: Faker::Name.first_name, 
-              #last_name: Faker::Name.last_name, 
+  User.create(first_name: Faker::Name.first_name, 
+              last_name: Faker::Name.last_name, 
               password: "THP2022", 
               email: "student_#{xstr}@yopmail.com", 
-              #birthdate: Faker::Date.birthday(min_age: 16, max_age: 100),
-              #gender: Faker::Gender.binary_type,
-              #photo:"student_#{xstr}.jpg",
+              birthdate: Faker::Date.birthday(min_age: 16, max_age: 100),
+              gender: Faker::Gender.binary_type,
+              photo_url:"student_#{xstr}.jpg",
               role:0)
-  #puts "  > Student n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
-  puts "  > [Limited] Student n°: #{User.last.id} - email: #{User.last.email} - encrypted_password: #{User.last.encrypted_password}"
+  puts "  > [Full version] Student n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
+  #puts "  > [Limited version] Student n°: #{User.last.id} - email: #{User.last.email} - encrypted_password: #{User.last.encrypted_password}"
 end
 puts "  > Finished seeding 'Students'"
 
@@ -43,28 +43,28 @@ puts "  > Finished seeding 'Students'"
 puts "  > Starts seeding 'Mentors' information"
 5.times do |x|
 	xstr = x+1 < 9 ? "0#{x+1}" : (x+1).to_s 
-  User.create(#first_name: Faker::Name.first_name, 
-              #last_name: Faker::Name.last_name, 
+  User.create(first_name: Faker::Name.first_name, 
+              last_name: Faker::Name.last_name, 
               password: "THP2022", 
               email: "mentor_#{xstr}@yopmail.com", 
-              #birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
-              #gender: Faker::Gender.binary_type,
-              #photo:"mentor_#{xstr}.jpg",
+              birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
+              gender: Faker::Gender.binary_type,
+              photo_url:"mentor_#{xstr}.jpg",
               role:1)
-	#puts "  > Mentor n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
-  puts "  > [Limited] Mentor n°: #{User.last.id} - email: #{User.last.email} - password: #{User.last.encrypted_password}"
+	puts "  > [Full version] Mentor n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
+  #puts "  > [Limited version] Mentor n°: #{User.last.id} - email: #{User.last.email} - password: #{User.last.encrypted_password}"
 end
 puts "  > Finished seeding 'Mentors'"
 
 # Seeding DB with 1 administrator
 puts "  > Starts seeding unique admin information"
-User.create(#first_name: "admin", 
-            #last_name: "admin", 
+User.create(first_name: "admin", 
+            last_name: "admin", 
             password: "THP2022", 
             email: "learnit_admin@yopmail.com",
-            #birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
-            #gender: Faker::Gender.binary_type,
-            #photo:"photo_admin.jpg",
+            birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
+            gender: Faker::Gender.binary_type,
+            photo_url:"photo_admin.jpg",
             role:2)
 puts "  > Finished seeding the one and only 'Admin'"
 
