@@ -1,26 +1,59 @@
-<h2>Log in</h2>
+<section class="devise_form">
+  <div class="row">
+    <div class="col-md-4 bg-primary">
+      <div class="row my-5">
+        <h2 class="text-center text-light_pulpit">Bienvenue sur LearnIt</h2>
+      </div>
+        <div class="wrapper">
+          <div class="d-flex flex-column justify-content-around align-items-center text-light_pulpit h-100">
+            <p class="text-center text-light_pulpit my-2 px-4 fs-4 ">L'application qui nous fait apprendre tous les jours de tout et de tous!</p>
+          </div>
+        </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <div class="row">
+          <div class="text-center my-3 my-md-5">
+            <%= link_to "S'inscrire", new_user_registration_path	, class: 'btn btn-outline-secondary' %>
+          </div>
+        </div>
     </div>
-  <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+    <div class="col-md-8 bg-light_pulpit">
+      <div class="row my-5">
+        <h2 class="text-center text-primary">Connecte toi vite</h2>
+      </div>
+      
+      <div class="wrapper">
+        <div class="d-flex flex-column justify-content-center align-items-center text-primary h-100">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="field text-center text-primary">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control my-4', placeholder: "Email" %>
+              </div>
+
+              <div class="field text-center text-primary">
+                <%= f.password_field :password, autocomplete: "current-password", class: 'form-control my-4', placeholder: "Password" %>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="field">
+                  <%= f.check_box :remember_me, class: 'form-check-input' %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="actions text-center my-3 my-md-5">
+          <%= f.submit "Se connecter", class: 'btn btn-neon_carrot' %>
+          <%= link_to "Mot de passe oublié", new_password_path(resource_name)	, class: 'btn btn-outline-neon_carrot' %>
+          <% end %>
+        </div>
+      </div>
+    
+    </div>
+
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</section>

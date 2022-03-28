@@ -1,5 +1,8 @@
 // Activate unabled functions
 
 $enable-negative-margins: true;
+$enable-shadows: true;
 
 // Customized components
+
+$form-check-input-checked-bg-color: var(--bs-secondary);

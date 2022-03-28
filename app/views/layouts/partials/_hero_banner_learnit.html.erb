@@ -1,0 +1,13 @@
+<div class="row justify-content-center">
+  <div class="row text-center rounded-bottom" style="background-image: url('<%= asset_path('''Learn_computer.jpg''') %>'); background-size: cover;">
+     <div class="col mx-auto mb-5 py-2">
+        <h2 class="fs-3 mt-5">Développez vos compétences dans un grand nombre de domaines</h2>
+        <h1 class="display-2 fw-bold text-primary my-3">Learn it</h1>
+        <div class="mt-4 gap-2 d-sm-flex justify-content-sm-center">
+          <% if !user_signed_in? # The button below will appear only if current_user is NOT connected %>
+          <%= link_to("S'inscrire",new_user_registration_path,class:"btn btn-warning px-4") %>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>

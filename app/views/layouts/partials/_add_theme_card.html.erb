@@ -1,0 +1,20 @@
+<%# Add theme card %>
+<div class="col-md-4 col-lg-3"> 
+  <div class="card bg-primary text-light h-100">
+    <div class="card-body">
+      <div class="d-flex flex-column justify-content-center align-items-center h-100">
+        <div class="card-text">
+          <p class="text-center m-0">Apprenez toujours</p>
+        </div>
+        <div class="card-text my-3 opacity-75">
+          <%= link_to themes_path, class: 'btn btn-outline-secondary rounded-circle' do %>
+            <i class="bi bi-plus fs-1"></i>
+          <%end%>
+        </div>
+        <div class="card-text">
+          <p class="text-center m-0">avec Learnit!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

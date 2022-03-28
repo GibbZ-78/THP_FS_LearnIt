@@ -1,0 +1,113 @@
+<header class="sticky">
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+    <div class="container-fluid">
+      
+      <!-- BEGIN ~ Logo retrieved through the Asset Pipeline -->
+      <%= link_to(root_path, class:"navbar-brand ms-3 me-5", method:"get") do %>
+        <%= image_tag("learnit_logo_black.png", height:"60px", alt:"LearnIt! - Logo of THE peer-learning web site that condensates the best of all worlds!") %>
+      <% end %>
+      <!-- END ~ Logo -->
+
+      <!-- BEGIN ~ Hamburger menu toggle icon -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- END ~ Hamburger menu toggle icon -->
+
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        
+        <!-- BEGIN ~ Main menu options and links to static pages: "Cursus", "Tarifs", "A propos de..." and "Contact" -->
+        <div class="ms-5">
+          <ul class="navbar-nav">
+            <li class="nav-item mx-2">
+              <%= link_to(themes_path, class:"nav-link", method:"get") do %>
+                <i class="bi bi-mortarboard-fill fs-5"> Cursus</i>
+              <% end%>
+            </li>
+            <% if !user_signed_in? %>
+            <li class="nav-item mx-2">
+              <%= link_to(fees_path, class:"nav-link", method:"get") do %>
+                <i class="bi bi-piggy-bank-fill fs-5"> Tarifs</i>
+              <% end %>
+            </li>
+            <% end %>
+            <li class="nav-item mx-2">
+              <%= link_to(about_path, class:"nav-link", method:"get") do%>
+                <i class="bi bi-info-circle-fill fs-5"> A propos de...</i>
+              <% end %>
+            </li>
+            <li class="nav-item mx-2">
+              <%= link_to(contact_path, class:"nav-link", method:"get") do %>
+                <i class="bi bi-send-fill fs-5"> Contact</i>
+              <% end %>
+            </li>
+            <li>
+          </ul>
+        </div>
+        <!-- END ~ Main menu options and links to static pages -->
+        
+        <!-- BEGIN ~ Search input & button -->
+        <div class="me-5">
+          <ul class="navbar-nav">
+            <form class="d-flex">
+              <input class="form-control rounded-pill me-n3" id="q" type="search" placeholder="Rechercher..." aria-label="Search">
+              <button class="btn btn-secondary rounded-circle ms-n4" type="submit" onclick="javascript:alert('Aucune occurence de \''+document.getElementById('q').value+'\' trouvée, désolé.');">
+                <i class="bi bi-search fs-5"></i>
+              </button>
+            </form>
+          </ul>
+        </div>
+        <!-- END ~ Search input & button -->
+        
+        <!-- BEGIN ~ Right part of the navbar: display changes depending of current user connection status  -->
+        <div class="ms-5">
+          <ul class="navbar-nav">
+          <!-- If user is connected, then display "log out" and "go to profile" buttons -->
+          <% if !user_signed_in? %>
+            <li class="nav-item dropstart">
+              <a class="btn btn-secondary rounded-circle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-box-arrow-in-right fs-5"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                  <%= link_to("Sign-in",new_user_session_path, class:"dropdown-item", method:"get") %>
+                </li>
+                <li>
+                  <%= link_to("Sign-up",new_user_registration_path, class:"dropdown-item", method:"get") %>
+                </li>
+              </ul>
+            </li>
+          <!-- If user is NOT connected, then display the "log in" (door) button with its dropdown items "sign-in" and "sign-up" -->
+          <% else %>
+            <li>
+              <%= link_to(destroy_user_session_path, class:"btn btn-danger rounded-circle mx-2", method:"delete") do %>
+                <i class="bi bi-box-arrow-left fs-5"></i>
+              <% end %>
+            </li>
+            <li class="nav-item dropstart">
+              <a class="btn btn-primary rounded-circle ms-2 me-3" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-square fs-5"></i>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                <li>
+                  <%= link_to("Mon dashboard",root_path, class:"dropdown-item", method:"get") %>
+                </li>
+                <li>
+                  <%= link_to("Mon profile",edit_user_registration_path, class:"dropdown-item", method:"get") %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+        <!-- END ~ Right part of the navbar -->
+      
+      </div>
+
+    </div>
+
+  </nav>
+
+</header>

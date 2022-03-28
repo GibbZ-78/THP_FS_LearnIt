@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Learnit</title>
+    <title>LearnIt!</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <%= javascript_include_tag 'application' %>
+    <%= favicon_link_tag asset_path('books.png') %>
   </head>
-
-  <body>
-    <div class="container">
+  <body>  
+    <%= render("layouts/partials/header") %>  <!-- Including the "header" partial, i.e. a sticky navbar with "Learn It!" logo -->
+    
+    <main class="container-fluid">            <!-- Adding a "main" container taking all the width of the page -->
       <%= yield %>
-    </div>
+    </main>
+    
+    <%= render("layouts/partials/footer") %>  <!-- Including the "footer" partial -->
   </body>
 </html>
