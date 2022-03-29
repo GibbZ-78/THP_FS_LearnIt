@@ -30,14 +30,6 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options)
   config.active_storage.service = :local
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = true
-
-  config.action_mailer.perform_caching = false
-
-  config.action_mailer.delivery_method = :smtp        # Will use STMP as default mail sending protocol (see detailed confi below)
-  config.action_mailer.perform_deliveries = true      # Will ACTIVATE ACTUAL mail sending (setinng this to "false" will avoid any mail departure)
-
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
@@ -62,9 +54,23 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  # BEGIN - LearnIt! specific SMTP and mailer configuration
   # Default URL options added after devise:install
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+  # Activate mailing error raising (default status is muted with default value 'false')
+  config.action_mailer.raise_delivery_errors = true
+
+  # Do NOT cache sent mails (default value 'false' kept as is)
+  config.action_mailer.perform_caching = false
+
+  # Use STMP as mail sending protocol (see detailed configuration below)
+  config.action_mailer.delivery_method = :smtp
+
+  # Activate effective mail sending (default value 'false' prevents any mail departure)
+  config.action_mailer.perform_deliveries = true
+
+  # Detailed SMTP configuration to perform mail sending through SENGRID (https://app.sendgrid.com/)
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV['SENDGRID_LOGIN'],
     :password => ENV['SENDGRID_PWD'],
@@ -74,4 +80,6 @@ Rails.application.configure do
     :authentication => :plain,
     :enable_starttls_auto => true
   }
+  # END - LearnIt! specific SMTP and mailer configuration
+
 end

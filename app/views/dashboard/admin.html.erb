@@ -204,7 +204,34 @@
 <section class="row justify-content-around">
   <!-- Users' list -->
   <div class="col-5 rounded bg-warning py-5" >
-    Encart qui recevra une liste d'utilisateurs (par ex.)
+    <table class="table table-hover table-stripe small">
+      <thead>
+        <tr>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> ID :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Nom :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Prénom :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Genre :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Anniversaire :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Rôle :</th>
+          <th><i class="bi bi-chevron-double-down text-secondary"></i> Inscription :</th>
+        </tr>
+      <thead>
+      <tbody>
+      <%
+      User.joins(:memberships).each do |my_user_and_membership|
+      %>
+        <tr>
+          <td><%= my_user_and_membership.id %></td>
+          <td><%= my_user_and_membership.last_name.upcase %></td>
+          <td><%= my_user_and_membership.first_name.capitalize %></td>
+          <td><%= my_user_and_membership.gender.capitalize %></td>
+          <td><%= my_user_and_membership.birthdate.strftime('%d.%B.%Y') %></td>
+          <td><%= my_user_and_membership.role %></td>
+          <td><%= my_user_and_membership.subscription_date.strftime('%d.%B.%Y') + ((my_user_and_membership.subscription_date > Time.now() - 1.year) ? " (OK)" : "(KO)" ) %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>  
   <!-- Themes' list-->
   <div class="col-5 rounded bg-success py-5">
