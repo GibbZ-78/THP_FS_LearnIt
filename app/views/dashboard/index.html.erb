@@ -2,20 +2,18 @@
   <%= render "layouts/partials/dashboard_banner" %>
 </section>
 
-<h2 class="text-center my-3">Bienvenue sur votre espace <%= "" || current_user.first_name %></h2>
+<h2 class="text-center my-3">Bienvenue sur votre espace <%= current_user.email %></h2>
 
 <section class="container mb-5"> <!-- Vos cursus -->
   <h3 class="mb-5 orange_underline">Vos cursus</h3>
   <div class="row justify-content-between">
-    <%# Si le current_user fait partie d'une session on affiche la (dernière) card 
-    du theme de cette session ... OU au max les 2 dernières sessions PUIS la card d'ajout %>
-    <%= render 'layouts/partials/theme_card' %>
-    <%= render 'layouts/partials/theme_card' %>
-    <%#fin IF %>
-    <%= render 'layouts/partials/add_theme_card' %>
-    <%#else%>
-    <%# on affiche uniquement la card d'ajout de session qui redirige vers themes %>
-    <%#end%>
+    <%if @themes_du_user.length == 0 %>
+      <%= render 'layouts/partials/add_theme_card' %>
+    <%else%>
+      <%@themes_du_user.each do |uts| uts = Theme.find(uts.theme_id)%>
+        <%= render 'layouts/partials/user_theme_card', theme: uts%>
+      <%end%>
+    <%end%>
   </div>
 </section>
 
@@ -29,8 +27,3 @@
     </div>
   </div>
 </section>
-
-
-
-
-
