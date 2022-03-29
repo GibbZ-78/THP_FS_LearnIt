@@ -9,7 +9,7 @@ class DashboardController < ApplicationController
     if !user_signed_in?
       puts "DEBUG - Entering 'dashboard#index' with a non-connected user"
       puts "        > Redirecting to site root and status 401." 
-      redirect_to(root_path, status: "401", flash: "Sorry, you're not authorized to access this part of LearnIt!.")
+      redirect_to(root_path, status: 302)
     else
       puts "DEBUG - Entering 'dashboard#index' with user #{current_user.first_name} #{current_user.last_name} (#{current_user.id}) with role #{current_user.what_role?} on #{Time.now}."
       case current_user.what_role?

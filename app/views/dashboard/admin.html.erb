@@ -201,41 +201,80 @@
 <hr/>
 
 <!-- Access to extracts of LearnIt! data - Full width -->
-<section class="row justify-content-between m-2">
+<section class="row justify-content-around">
   <!-- Users' list -->
-  <div class="col-6 rounded bg-light shadow" >
-    <table class="table table-hover table-stripe small">
-      <thead>
-        <tr>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> ID :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Nom :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Prénom :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Genre :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Anniversaire :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Rôle :</th>
-          <th><i class="bi bi-chevron-double-down text-secondary"></i> Inscription :</th>
-        </tr>
-      <thead>
-      <tbody>
-      <% User.where.not(role:2).each do |my_user| %>
-        <% Membership.where(user_id:my_user.id).each do |my_membership| %>
-        <tr>
-          <td><%= my_user.id %></td>
-          <td><%= my_user.last_name.upcase %></td>
-          <td><%= my_user.first_name.capitalize %></td>
-          <td><%= my_user.gender.capitalize %></td>
-          <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
-          <td><%= my_user.role %></td>
-          <td><%= my_membership.subscription_date.strftime('%d.%m.%Y') + ((my_membership.subscription_date > Time.now() - 1.year) ? " <span class='text-success'>(OK)</span>" : " <span class='text-danger'>(KO)</span>" ) %></td>
-        </tr>
+  <div class="col-6 rounded bg-light shadow border p-1" >
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Classer par...
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-item">IDs</li>
+        <li class="dropdown-item">Noms</li>
+        <li class="dropdown-item">Prénoms</li>
+        <li class="dropdown-item">Date de naissance</li>
+      </ul>
+    </div>
+    <div>
+      <table class="table table-hover table-stripe small">
+        <thead>
+          <tr>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> ID</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Nom</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Prénom</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Genre</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Anniversaire</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Rôle</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Inscription</th>
+          </tr>
+        <thead>
+        <tbody>
+        <% User.where.not(role:2).each do |my_user| %>
+          <% Membership.where(user_id:my_user.id).each do |my_membership| %>
+          <tr>
+            <td><%= my_user.id %></td>
+            <td><%= my_user.last_name.upcase %></td>
+            <td><%= my_user.first_name.capitalize %></td>
+            <td><%= my_user.gender.capitalize %></td>
+            <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
+            <td><%= my_user.role %></td>
+            <td>
+              <%= my_membership.subscription_date.strftime('%d.%m.%Y') %>
+              <%if my_membership.subscription_date > (Time.now() - 1.year) 
+                  mbrshp_status_color = "success"
+                  mbrshp_status_msg = "OK"
+                else
+                  mbrshp_status_color = "danger"
+                  mbrshp_status_msg = "KO"
+                end %>
+              <span class="text-<%=mbrshp_status_color%>"> (<%=mbrshp_status_msg%>)</span>
+            </td>
+          </tr>
+          <% end %>
         <% end %>
-      <% end %>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
   </div>  
-  <!-- Themes' list-->
-  <div class="col-5 rounded bg-light shadow m-2">
-    Encart qui recevra une liste de cours (par ex.)
-  </div>
-</section>
 
+  <!-- Themes' list-->
+  <div class="col-5 rounded bg-light shadow border p-1">
+    <div class="accordion" id="themeAccordion">
+      <% Theme.all.each do |my_theme| %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="heading<%=my_theme.id%>">
+          <button class="accordion-button bg-secondary text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=my_theme.id%>" aria-expanded="<%=(my_theme.id == Theme.first.id).to_s%>" aria-controls="collapse<%=my_theme.id%>">
+            <%= my_theme.title%>
+          </button>
+        </h2>
+        <div id="collapse<%=my_theme.id%>" class="accordion-collapse collapse" aria-labelledby="heading<%=my_theme.id%>" data-bs-parent="#themeAccordion">
+          <div class="accordion-body">
+            <%= my_theme.content %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</section>
