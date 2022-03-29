@@ -201,9 +201,9 @@
 <hr/>
 
 <!-- Access to extracts of LearnIt! data - Full width -->
-<section class="row justify-content-around">
+<section class="row justify-content-between m-2">
   <!-- Users' list -->
-  <div class="col-5 rounded py-5" >
+  <div class="col-6 rounded bg-light shadow" >
     <table class="table table-hover table-stripe small">
       <thead>
         <tr>
@@ -224,9 +224,9 @@
           <td><%= my_user.last_name.upcase %></td>
           <td><%= my_user.first_name.capitalize %></td>
           <td><%= my_user.gender.capitalize %></td>
-          <td><%= my_user.birthdate.strftime('%d.%B.%Y') %></td>
+          <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
           <td><%= my_user.role %></td>
-          <td><%= my_membership.subscription_date.strftime('%d.%B.%Y') + ((my_membership.subscription_date > Time.now() - 1.year) ? " (OK)" : "(KO)" ) %></td>
+          <td><%= my_membership.subscription_date.strftime('%d.%m.%Y') + ((my_membership.subscription_date > Time.now() - 1.year) ? " <span class='text-success'>(OK)</span>" : " <span class='text-danger'>(KO)</span>" ) %></td>
         </tr>
         <% end %>
       <% end %>
@@ -234,7 +234,7 @@
     </table>
   </div>  
   <!-- Themes' list-->
-  <div class="col-5 rounded bg-success py-5">
+  <div class="col-5 rounded bg-light shadow m-2">
     Encart qui recevra une liste de cours (par ex.)
   </div>
 </section>
