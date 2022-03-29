@@ -4,21 +4,20 @@ class StaticPagesController < ApplicationController
   def home
     if user_signed_in?
       if user.role <= 1
+        membership = Membership.where(user_id:current_user.id).last
         if membership != nil
-          if membership.timestamps < datetime.now - 365
-            <%= link_to checkout_create_path %>
-          else 
-            <%= link_to dashboard_path %>
+          if membership.subscription_date >= datetime.now() - 365.days
+            redirect_to dashboard_index_path, method: "get"
+          else
+            redirect_to checkout_create_path, method: "post"
           end
         else
-          <%= link_to checkout_create_path %>
+          redirect_to new_user_registration_path, method: "get"
         end
       else
-        <%= link_to dashboard_path %>
+        redirect_to dashboard_index_path, method: "get"
       end
-    else
-      <%= link_to 'Login', ... %> #substitute the ... for whatever path goes to login
-    end
+    end # If not logged in, does nothing
   end
   
   def uikit
