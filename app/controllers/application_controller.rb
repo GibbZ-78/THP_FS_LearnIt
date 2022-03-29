@@ -15,7 +15,7 @@ def stripe_after_sign_in
         post '/checkout/create', as :user_root #puts the STRIPE checkout path into the "user_root_path"
       end
     else
-      #redirect_to dashboard_index_path, method: "get"
+      #redirect_to dashboard_index_path, method: "get" 
       get '/dashboard' => 'dashboard#index', as: :user_root
     end
   end #If not logged in, does nothing
