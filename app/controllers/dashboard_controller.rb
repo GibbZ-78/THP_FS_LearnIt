@@ -3,9 +3,17 @@ class DashboardController < ApplicationController
   before_action :authenticate_user!
   
   def index
+    #Affichage des thèmatiques liées au user actuel
+    @id = current_user.id
+    @themes_du_user = UserThemeSeason.all.where(user_id: @id)
+      
+    # if current_user.role == "student"
+    #   redirect_to 'dashboard#student'
+    # end  
   end
 
   def student
+
   end
 
   def mentor
