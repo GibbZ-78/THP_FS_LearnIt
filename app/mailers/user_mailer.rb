@@ -1,5 +1,6 @@
 class UserMailer < ApplicationMailer
-    default from: 'jb.vidal@gmail.com'
+  
+  default from: 'jb.vidal@gmail.com'
  
   def membership_email(membership)
     @user = membership.user 

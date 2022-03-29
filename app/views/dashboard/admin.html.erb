@@ -203,7 +203,7 @@
 <!-- Access to extracts of LearnIt! data - Full width -->
 <section class="row justify-content-around">
   <!-- Users' list -->
-  <div class="col-5 rounded bg-warning py-5" >
+  <div class="col-5 rounded py-5" >
     <table class="table table-hover table-stripe small">
       <thead>
         <tr>
@@ -217,18 +217,18 @@
         </tr>
       <thead>
       <tbody>
-      <%
-      User.joins(:memberships).each do |my_user_and_membership|
-      %>
+      <% User.where.not(role:2).each do |my_user| %>
+        <% Membership.where(user_id:my_user.id).each do |my_membership| %>
         <tr>
-          <td><%= my_user_and_membership.id %></td>
-          <td><%= my_user_and_membership.last_name.upcase %></td>
-          <td><%= my_user_and_membership.first_name.capitalize %></td>
-          <td><%= my_user_and_membership.gender.capitalize %></td>
-          <td><%= my_user_and_membership.birthdate.strftime('%d.%B.%Y') %></td>
-          <td><%= my_user_and_membership.role %></td>
-          <td><%= my_user_and_membership.subscription_date.strftime('%d.%B.%Y') + ((my_user_and_membership.subscription_date > Time.now() - 1.year) ? " (OK)" : "(KO)" ) %></td>
+          <td><%= my_user.id %></td>
+          <td><%= my_user.last_name.upcase %></td>
+          <td><%= my_user.first_name.capitalize %></td>
+          <td><%= my_user.gender.capitalize %></td>
+          <td><%= my_user.birthdate.strftime('%d.%B.%Y') %></td>
+          <td><%= my_user.role %></td>
+          <td><%= my_membership.subscription_date.strftime('%d.%B.%Y') + ((my_membership.subscription_date > Time.now() - 1.year) ? " (OK)" : "(KO)" ) %></td>
         </tr>
+        <% end %>
       <% end %>
       </tbody>
     </table>
