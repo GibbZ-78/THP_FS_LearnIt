@@ -1,11 +1,10 @@
-<%= @go_stripe %>
-<!-- PARTIE BANNER -->
+<!-- BANNER -->
 
 <%= render "layouts/partials/hero_banner_index" %>
 
 
-<!-- PARTIE PRESENTATION -->
-<!-- A réintégrer dans un fichier CSS spécifique -->
+<!-- PRESENTATION -->
+<!-- Should be in a CSS stylesheet -->
 
 <style>
     .orange_underline{
@@ -16,10 +15,42 @@
 
 <section>
   <!-- Redirection Stripe using an AJAX tunnel ("remote: true") -->
-  <%= button_to("Payez", checkout_create_path, method: :post, remote: true) %>
-  <%= link_to("S'inscrire",checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+  <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+  <%= @go_stripe %>
 </section>
 
+<!--Test modal 1 seem to work-->
+
+<section>
+  <% if @go_stripe == true %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Procéder au paiement
+  </button>
+  
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Accédez au paiement</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Vous allez être redirigé vers votre panier en ligne.
+        </div>
+        <div class="modal-footer">
+          <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal test 2 not working-->
+    <div class="modal-dialog modal-fullscreen-sm-down">
+      <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+    </div>
+  <% end %>
+</section>
 
 <section class="row justify-content-between mb-5 p-3 m-3">
   <div class="col-12">

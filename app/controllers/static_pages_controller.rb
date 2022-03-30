@@ -9,7 +9,6 @@ class StaticPagesController < ApplicationController
           if membership.subscription_date >= Time.now() - 365.days
             #redirect_to dashboard_index_path, method: "get"
             #get '/dashboard' => 'dashboard#index', as: :user_root
-            puts "toto"
             @go_stripe = false
           else
             #post '/checkout/create', to: 'checkout#create', as: :user_root #puts the STRIPE checkout path into the "user_root_path"
@@ -23,11 +22,9 @@ class StaticPagesController < ApplicationController
         #redirect_to dashboard_index_path, method: "get" 
         #get '/dashboard' => 'dashboard#index', as: :user_root
         @go_stripe = false
-        puts "toto 2"
       end
     else
       @go_stripe = false
-      puts "toto 3"
     end #If not logged in, does nothing
   end
   
