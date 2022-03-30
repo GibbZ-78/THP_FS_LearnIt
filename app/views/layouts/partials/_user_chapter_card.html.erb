@@ -16,6 +16,11 @@
 <div class="col-2">
   <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
     <p class="fs-1"><%= UserThemeSeasonChapter.find(chapter.id).completion_rate %> %</p>
-    <%= link_to 'Poursuivre', courses_path, class: 'text-deep_blue' %>
+    <%my_courses = UtscCourse.where(user_theme_season_chapter_id: UserThemeSeasonChapter.find(chapter.id)).first %>
+    <%if my_courses.nil?%>
+      <p>Pas de cours</p>
+    <%else%>
+      <%= link_to 'Poursuivre', course_path(my_courses), class: 'text-deep_blue' %>
+    <%end%>
   </div>
 </div>
