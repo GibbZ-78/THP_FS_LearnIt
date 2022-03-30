@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :seasons
   resources :memberships
   resources :static_pages
+  resources :user_theme_seasons   # JBV - To be digged up if we need to create all standard routes when "new/create" will be mainly used...?
 
   get 'uikit', to: 'static_pages#uikit'
   get 'about', to: 'static_pages#about'

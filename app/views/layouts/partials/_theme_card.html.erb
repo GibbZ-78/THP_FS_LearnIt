@@ -1,30 +1,49 @@
-<div class="col-md-4 col-lg-3 mb-3"> 
-  <div class="card bg-primary text-light">
-    <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
-    <div class="card-body mt-2">
-      <h5 class="card-title"><%= theme.title %></h5>
-      <p class="card-text my-4">
-        Un cursus de <%= theme.chapters.length %> modules.</br>
-        <%= theme.content.truncate(60,separator:" ") %>
-      </p>
-
-      <p class="card-text-infos">Plus d'infos</p>
+<div class="card col-md-4 col-lg-3 m-3 bg-primary text-light">
+  <% my_theme_image_url = theme.id < 10 ? "theme_0#{theme.id}.jpg" : "theme_#{theme.id}.jpg" %>
+  <%= image_tag(my_theme_image_url, alt: "Illustration du thème '#{theme.title}' (#{theme.id})", class: "card-img-top") %>
+  <div class="card-body mt-2">
+    <h5 class="card-title"><%= theme.title %></h5>
+    <p class="card-text mt-4 mb-0">
+      Un cursus en <span class="fw-bold fs-5"><%= theme.chapters.length %></span> module(s).
+    </p>
+    <p class="card-text fst-italic mt-0 mb-4">
+      <%= theme.content.truncate(60, separator:" ") %>
+    </p>
+    <p class="card-text">
+      <%= link_to "Plus d'infos", theme_path(theme.id), class: "text-light orange_underline" %>
+    </p>
+  </div>
+  <div class="card-footer">
+    <% if user_signed_in? %>
+    <div class="row justify-content-between">
+      <div class="col-4">
+        <%= link_to("Edit", edit_theme_path(theme.id), class:"btn btn-sm btn-secondary") %>
+      </div>
+      <div class="col-4">
+        <%= link_to("Add", new_theme_path, class:"btn btn-sm btn-blue_violet") %>
+      </div>
+      <div class="col-4">
+        <%= link_to("Suppress", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
+      </div>
     </div>
-    <div class="card-footer">
-    <div class="d-flex justify-content-between align-items-center">
-      <div id="arrow" class="col-4">
-        <%= link_to courses_path do %>
+    <% else %>
+    <div class="row justify-content-between">
+      <% my_season = Season.where(theme_id: theme.id).where("start_date > ?", Time.now).order(:start_date).first %>
+      <% if my_season.nil? %>
+      <div id="session_infos" class="col">
+        <span class="align-middle">Une nouvelle session sera bientôt programmée !</span>
+      </div>
+      <% else %>
+      <div id="session_infos" class="col-10">
+        <span class="align-middle">Prochaine session dans <%= my_season.start_in? %> jours</span>
+      </div>
+      <div id="arrow" class="col-2">
+        <%= link_to user_theme_seasons_path(the_user: current_user.id, the_theme: theme.id), method: "post" do %>
           <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
         <%end%>
       </div>
-      <div id="session_infos" class="col-8">
-        <%# Si !session_started? %> <!-- methode model theme ? -->
-          <span class="align-middle">Prochaine session dans <%= 5 || theme.start_in? %> jours</span>
-        <%# else %>
-          <%#= link_to 'Rejoindre', root_path, class: '' %>
-        <%#end%>
-      </div>
+      <% end %>
     </div>
-    </div>
+    <% end %>
   </div>
 </div>

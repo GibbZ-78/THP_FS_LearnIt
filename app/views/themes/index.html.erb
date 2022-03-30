@@ -1,11 +1,11 @@
-<section class="row justify-content-center">
+<section class="row justify-content-center g-0">
   <%= render("layouts/partials/hero_banner_learnit") %>
 </section>
+
 <hr>
-<div class="container">
-  <section class="row justify-content-center">
+
+<section class="row justify-content-around g-0">
     <% @themes.each do |one_theme| %>
       <%= render("layouts/partials/theme_card", theme: one_theme)%>
-   <% end %>
-  </section>
-</div>
+    <% end %>
+</section>
