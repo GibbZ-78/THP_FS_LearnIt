@@ -19,8 +19,7 @@
           <%end%>
         </div>
         <div id="session_infos" class="col-8">
-          <%# <span class="align-middle">Prochaine session dans <%= season.start_date jours</span> %>
-          <span class="align-middle">Rejoindre</span>
+          <span class="align-middle">Poursuivre</span>
         </div>      
       <%else%>
         <div id="arrow" class="col-4">
@@ -29,8 +28,7 @@
       <%end%>
         </div>
         <div id="session_infos" class="col-8">
-          <%# <span class="align-middle">Prochaine session dans <%= season.start_date jours</span> %>
-          <span class="align-middle">Prochaine session dans <%= season.start_in? %> jours</span>
+          <span class="align-middle">Débute dans <%= season.start_in? %> jours</span>
         </div>
       <%end%>
     </div>
