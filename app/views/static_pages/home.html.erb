@@ -61,9 +61,9 @@
   <section class="container">
     <h1 class="orange_underline">Nos cursus</h1>
       <div class="row justify-content-between py-5">
-        <%if @themes%>
-          <% @themes.each do |theme| %>
-            <%= render 'layouts/partials/theme_card', theme: theme %>
+        <%if @future_seasons_themes%>
+          <% @future_seasons_themes.each do |future_seasons_theme| %>
+            <%= render 'layouts/partials/homepage_theme_card', theme: future_seasons_theme %>
           <%end%>
         <%else%>
           <div class="col-md-6 alert alert-danger">
