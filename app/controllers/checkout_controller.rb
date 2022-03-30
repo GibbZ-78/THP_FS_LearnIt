@@ -53,8 +53,7 @@ class CheckoutController < ApplicationController
     @my_membership = Membership.create(user_id: @my_user.id, order_date: Date.today, comment:"Created from membership nr. #{@my_membership.id} of #{@my_user.first_name} #{@my_user.last_name}", payment_method: "Card over Stripe")
     puts "... Done"
   
-    redirect_to : dashboard_index_path
-    end
+    redirect_to dashboard_index_path
 
     puts "INFO - Stripe - Closing 'success' method"
 
