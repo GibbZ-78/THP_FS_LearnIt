@@ -1,4 +1,4 @@
-<%uts_chapter = Chapter.where(theme_id: 2) %>
+<%uts_chapter = Chapter.where(theme_id: params[:theme]) %>
   <%uts_chapter.each do |chapter| %>
     <div class="row my-3">
       <%= render 'layouts/partials/user_chapter_card', chapter: chapter %>

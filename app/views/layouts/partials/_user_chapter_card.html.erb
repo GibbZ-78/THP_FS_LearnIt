@@ -13,7 +13,7 @@
 </div>
 <div class="col-2">
   <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
-    <p class="fs-1"><%= '80%' || chapter.completion %></p>
+    <p class="fs-1"><%= UserThemeSeasonChapter.find(chapter.id).completion_rate %> %</p>
     <%= link_to 'Poursuivre', root_path, class: 'text-deep_blue' %>
   </div>
 </div>

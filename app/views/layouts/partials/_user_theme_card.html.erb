@@ -14,7 +14,7 @@
         <p>Session terminée !</p>
       <%elsif season.is_joinable?%>
         <div id="arrow" class="col-4">
-          <%= link_to dashboard_student_path, remote: true do %>
+          <%= link_to dashboard_student_path+"?theme=#{theme.id} ", remote: true do %>
             <i id="theme_<%=theme.id%>" class="bi bi-caret-right-fill fs-1 text-secondary"></i>
           <%end%>
         </div>
@@ -24,7 +24,7 @@
         </div>      
       <%else%>
         <div id="arrow" class="col-4">
-          <%= link_to dashboard_student_path, remote: true do %>
+          <%= link_to dashboard_student_path+"?theme=#{theme.id}", remote: true do %>
             <i id="arrow_button" class="bi bi-caret-right-fill fs-1 text-secondary"></i>
       <%end%>
         </div>
