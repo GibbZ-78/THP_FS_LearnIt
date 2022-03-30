@@ -24,12 +24,21 @@ class DashboardController < ApplicationController
       else
         # By default, redirecting to dashboard#student
         puts "        > Redirecting to 'dashboard#student' controller then related 'student dashboard'." 
-        # redirect_to(dashboard_student_path, status: 302)
+        redirect_to(dashboard_student_path, status: 302)
       end
     end
   end
 
   def student
+    #Affichage des thèmatiques liées au user actuel
+    @id = current_user.id
+    @themes_du_user = UserThemeSeason.where(user_id: @id)
+    
+    respond_to do |format|
+      format.html { }
+      # format.js { @themes_du_user }
+      format.js {  }
+    end
   end
 
   def mentor
