@@ -5,8 +5,15 @@
   </head>
   <body>
     <h1>Bonjour Admin,</h1>
+    <p>Excellente nouvelle : LearnIt! compte un(e) nouvel(le) inscrit(e) en la personne de :</p>
     <p>
-      Félicitations, une nouvelle vente a été réalisée sur Learnit.
+      <ul>
+        <li><%= @user.gender == "Female" ? "Madame" : "Monsieur" %><%= @user.first_name.capitalize %> <%= @user.last_name.upcase %></li>
+        <li>E-mail : <%= @user.email %></li>
+        <li>Date de naissance : <%= @user.birthdate.strftime("%d %B %Y") %></li>
+        <li>Role: <%= @user.what_role? %></li>
+      </ul>
     </p>
+    <p>Bonne journée</p>
   </body>
 </html>

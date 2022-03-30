@@ -14,4 +14,5 @@ class Membership < ApplicationRecord
   def admin_send
     UserMailer.admin_email(self).deliver_now
   end
+  
 end
