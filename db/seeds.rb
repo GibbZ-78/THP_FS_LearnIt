@@ -74,14 +74,14 @@ puts "  > Finished seeding the one and only 'Admin'"
  #                         #
   #########################
 
-# puts "  > Starts seeding 'memberships'"
-# User.all.each do |my_user|
-#   if my_user.role != 2
-#     Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between(from: 2.years.ago, to: 1.day.ago))
-#     puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
-#   end
-# end
-# puts "  > Finished seeding 'memberships'"
+puts "  > Starts seeding 'memberships'"
+User.all.each do |my_user|
+   if my_user.role != 2
+     Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between(from: 2.years.ago, to: 1.day.ago))
+     puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
+   end
+ end
+ puts "  > Finished seeding 'memberships'"
 
   ########################################
  #                                        #
