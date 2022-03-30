@@ -1,3 +1,4 @@
+<%= @go_stripe %>
 <!-- PARTIE BANNER -->
 
 <%= render "layouts/partials/hero_banner_index" %>
@@ -12,6 +13,12 @@
         text-decoration-color : rgba(242, 145, 56, 1);
     }
 </style> 
+
+<section>
+  <!-- Redirection Stripe using an AJAX tunnel ("remote: true") -->
+  <%= button_to("Payez", checkout_create_path, method: :post, remote: true) %>
+  <%= link_to("S'inscrire",checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+</section>
 
 
 <section class="row justify-content-between mb-5 p-3 m-3">
