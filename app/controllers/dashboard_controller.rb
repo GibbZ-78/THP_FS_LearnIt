@@ -1,7 +1,10 @@
 class DashboardController < ApplicationController
   
+  # Invoking DEVISE to benefit from "user_signed_in?" and "current_user" helpers
   before_action :authenticate_user!
   
+  # JBV - Proposition d'approche du branchement vers le dashboard dédié à chaque population
+  #       TO DO: Vérifier adéquation des code HTTP de redirection / erreur
   def index
     if !user_signed_in?
       puts "DEBUG - Entering 'dashboard#index' with a non-connected user"
@@ -44,10 +47,10 @@ class DashboardController < ApplicationController
   # Manages access to "Admin Dashboard"
   def admin
     if !user_signed_in? || current_user.what_role? != "admin"
-      puts "DEBUG - Entering 'dashboard#admin' with a non-connected user >> Redirecting to site root"
-      redirect_to(root_path, status: "401", flash: "Sorry, you're not authorized to access this part of LearnIt!.")
+      puts "DEBUG - Entering 'dashboard#admin' with a non-connected user >> Redirecting to site root and status 401." 
+      redirect_to(root_path, status: 401, flash: "Sorry, you're not authorized to access this part of LearnIt!.")
     else
-      puts "DEBUG - Entering 'dashboard#admin' with user #{current_user.first_name} #{current_user.last_name} (#{current_user.id}) with role #{current_user.what_role?} on #{Time.now}"
+      puts "DEBUG - Entering 'dashboard#admin' with user #{current_user.first_name} #{current_user.last_name} (#{current_user.id}) with role #{current_user.what_role?} on #{Time.now}."
     end
   end
 

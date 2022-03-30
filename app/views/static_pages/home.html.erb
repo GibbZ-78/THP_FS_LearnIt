@@ -160,7 +160,7 @@
         <p class="text-center mt-2 pb-2 text-secondary">Sans engagement !</p>
       </div>
       <div class="d-flex justify-content-center mp-1 p-3">
-        <a class="btn btn-outline-secondary text-light text-center">Se connecter</a>
+        <%= link_to("Se connecter",new_user_session_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"get") %>
       </div>
     </div> 
   </div>
@@ -250,6 +250,11 @@
           <%= image_tag("thp_logo.png", alt:"Logo THP", width: "200") %>
         </a>
       </div>
+      <div class="col-md-2">
+      <a href="https://www.investprep.fr/">
+        <%= image_tag("Invest_Prep_logo.png", alt:"Formation Private Equity Invest Prep", width: "200") %>
+      </a>
+    </div>
       <div class="col-md-2">
         <a href="https://fr.wikipedia.org/wiki/Mammouth_(hypermarch%C3%A9)">
           <%= image_tag("mammouth_logo.png", alt:"Logo Mammouth", width: "200") %>
