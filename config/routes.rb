@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # JBV - Adding specific routes for dashboards' management
   scope "/dashboard" do
     get "admin", to: "dashboard#admin", as: "dashboard_admin"   # JBV - Specific route for the ADMIN dashboard
+    get "student", to: "dashboard#student", as: "dashboard_student"
   end
   
   resources :dashboard  # JBV - Not sure it is useful to keep this as we call only non-standard methods from this controller...?
