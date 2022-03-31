@@ -14,8 +14,6 @@
 </style> 
 
 <section>
-  <!-- Redirection Stripe using an AJAX tunnel ("remote: true") -->
-  <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
   <%= @go_stripe %>
 </section>
 
@@ -23,32 +21,29 @@
 
 <section>
   <% if @go_stripe == true %>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Procéder au paiement
-  </button>
   
-  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="staticBackdropLabel">Accédez au paiement</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          Vous allez être redirigé vers votre panier en ligne.
-        </div>
-        <div class="modal-footer">
-          <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">Accédez au paiement</h5>
+        
+          </div>
+          <div class="modal-body">
+            Vous allez être redirigé vers votre panier en ligne.
+          </div>
+          <div class="modal-footer">
+            <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Modal test 2 not working-->
-    <div class="modal-dialog modal-fullscreen-sm-down">
-      <%= link_to("S'inscrire", checkout_create_path, class:"btn btn-primary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
-    </div>
+    <script>
+      var myModal = new bootstrap.Modal(document.getElementById("staticBackdrop"))
+      myModal.show();
+    </script>
+
   <% end %>
 </section>
 
