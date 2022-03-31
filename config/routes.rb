@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get 'about', to: 'static_pages#about'
   get 'contact', to: 'static_pages#contact'
   get 'fees', to: 'static_pages#fees'
+  post 'contact', to: 'static_pages#contact_form', as: 'contact_form'
 
 # 28.03.2022 - Adding STRIPE dedicated routes
 scope "/checkout" do
