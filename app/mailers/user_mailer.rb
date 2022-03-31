@@ -10,8 +10,8 @@ class UserMailer < ApplicationMailer
   end
 
   def admin_email(membership)
-    @user = membership.user 
+    @user = membership.user
     @membership = membership
-    mail(to: "learnit_admin@yopmail.com", subject: "Nouvelle inscription sur LearnIt!")
+    mail(to: "learnit_admin@yopmail.com", subject: 'Nouvelle inscription sur LearnIt!')
   end
 end

@@ -29,7 +29,7 @@ class CheckoutController < ApplicationController
     )
 
     respond_to do |format|
-      format.js   # Render views/checkout/create.js.erb
+      format.js  # Render views/checkout/create.js.erb
     end
     puts "INFO - Stripe - Closing payment funnel"
   end
@@ -50,7 +50,7 @@ class CheckoutController < ApplicationController
 
     # Manageing "Order" object creation from current_user's "Cart"
     @my_user = current_user
-    @my_membership = Membership.create(user_id: @my_user.id, order_date: Date.today, comment:"Created from membership nr. #{@my_membership.id} of #{@my_user.first_name} #{@my_user.last_name}", payment_method: "Card over Stripe")
+    @my_membership = Membership.create(user_id: @my_user.id, subscription_date: Time.now)
     puts "... Done"
   
     redirect_to dashboard_index_path
