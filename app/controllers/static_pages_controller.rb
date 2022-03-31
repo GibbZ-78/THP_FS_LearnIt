@@ -1,7 +1,8 @@
 class StaticPagesController < ApplicationController
-  #before_action :authenticate_user!
   
   def home
+    @future_seasons_themes = Season.where("start_date > ?", Date.today).all
+    
     if user_signed_in?
       if current_user.what_role? == "student"
         membership = Membership.where(user_id:current_user.id).last 

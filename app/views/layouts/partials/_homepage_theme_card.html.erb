@@ -1,0 +1,26 @@
+<div class="col-md-4 col-lg-3 mb-3"> 
+  <div class="card bg-primary text-light">
+    <%= image_tag('code_bg.jpg', alt: "Background code theme card", class: 'card-img-top') %>
+    <div class="card-body mt-2">
+      <h5 class="card-title"><%= theme.theme.title %></h5>
+      <p class="card-text my-4">
+        Un cursus de <%= theme.theme.chapters.length %> modules.</br>
+        <%= theme.theme.content.truncate(60,separator:" ") %>
+      </p>
+
+      <p class="card-text-infos">Plus d'infos</p>
+    </div>
+    <div class="card-footer">
+    <div class="d-flex justify-content-between align-items-center">
+      <div id="arrow" class="col-4">
+        <%= link_to themes_path do %>
+          <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
+        <%end%>
+      </div>
+      <div id="session_infos" class="col-8">
+        <span class="align-middle">Prochaine session dans <%= theme.start_in? %> jours</span>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,4 @@
-<header class="sticky">
+<header>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
@@ -49,7 +49,7 @@
         <!-- END ~ Main menu options and links to static pages -->
         
         <!-- BEGIN ~ Search input & button -->
-        <div class="me-5">
+        <%# <div class="me-5">
           <ul class="navbar-nav">
             <form class="d-flex">
               <input class="form-control rounded-pill me-n3" id="q" type="search" placeholder="Rechercher..." aria-label="Search">
@@ -58,7 +58,7 @@
               </button>
             </form>
           </ul>
-        </div>
+        </div> %>
         <!-- END ~ Search input & button -->
         
         <!-- BEGIN ~ Right part of the navbar: display changes depending of current user connection status  -->
@@ -92,10 +92,22 @@
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
                 <li>
-                  <%= link_to("Mon dashboard", dashboard_index_path, class:"dropdown-item", method:"get") %>
+                  <span class="dropdown-item orange_underline">
+                    <i class="bi bi-chevron-double-right text-secondary"></i>
+                    <%= current_user.first_name.capitalize %> <%= current_user.last_name.upcase%>
+                    <i class="bi bi-chevron-double-left text-secondary"></i>
+                  </span>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                  <%= link_to(dashboard_index_path, class:"dropdown-item", method:"get") do %>
+                    <i class="bi bi-speedometer"></i> Tableau de bord
+                  <% end %>
                 </li>
                 <li>
-                  <%= link_to("Mon profile", edit_user_registration_path, class:"dropdown-item", method:"get") %>
+                  <%= link_to(edit_user_registration_path, class:"dropdown-item", method:"get") do %>
+                    <i class="bi bi-person-rolodex"></i> Profil utilisateur
+                  <% end %>
                 </li>
               </ul>
             </li>
