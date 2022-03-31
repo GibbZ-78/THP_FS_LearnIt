@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-    
+
   def home
     @future_seasons_themes = Season.where("start_date > ?", Date.today).all
   end

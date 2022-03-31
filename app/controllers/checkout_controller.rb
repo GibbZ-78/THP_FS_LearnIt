@@ -56,7 +56,6 @@ class CheckoutController < ApplicationController
     redirect_to dashboard_index_path
 
     puts "INFO - Stripe - Closing 'success' method"
-
   end
 
 end
