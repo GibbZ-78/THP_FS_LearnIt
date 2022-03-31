@@ -1,7 +1,7 @@
 class StaticPagesController < ApplicationController
-  before_action :authenticate_user!
-  
+    
   def home
+    @future_seasons_themes = Season.where("start_date > ?", Date.today).all
   end
   
   def uikit
