@@ -37,8 +37,8 @@ class CheckoutController < ApplicationController
   # Error encountered hence suppressing STRIPE payment tunnel
   def cancel
     puts "INFO - Stripe - Starting 'cancel' method"
-    @session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    @payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
+    #@session = Stripe::Checkout::Session.retrieve(params[:session_id])
+    #@payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
     puts "INFO - Stripe - Closing 'cancel' method"
   end
 
