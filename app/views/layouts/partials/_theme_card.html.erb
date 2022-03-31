@@ -15,35 +15,39 @@
   </div>
   <div class="card-footer">
     <% if user_signed_in? %>
-    <div class="row justify-content-between">
-      <div class="col-4">
-        <%= link_to("Edit", edit_theme_path(theme.id), class:"btn btn-sm btn-secondary") %>
-      </div>
-      <div class="col-4">
-        <%= link_to("Add", new_theme_path, class:"btn btn-sm btn-blue_violet") %>
-      </div>
-      <div class="col-4">
-        <%= link_to("Suppress", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
-      </div>
-    </div>
-    <% else %>
-    <div class="row justify-content-between">
-      <% my_season = Season.where(theme_id: theme.id).where("start_date > ?", Time.now).order(:start_date).first %>
-      <% if my_season.nil? %>
-      <div id="session_infos" class="col">
-        <span class="align-middle">Une nouvelle session sera bientôt programmée !</span>
+      <% if current_user.what_role? == "admin" %>
+      <div class="row justify-content-between">
+        <div class="col-4">
+          <%= link_to("Edit", edit_theme_path(theme.id), class:"btn btn-sm btn-secondary") %>
+        </div>
+        <div class="col-4">
+          <%= link_to("Add", new_theme_path, class:"btn btn-sm btn-blue_violet") %>
+        </div>
+        <div class="col-4">
+          <%= link_to("Suppress", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
+        </div>
       </div>
       <% else %>
-      <div id="session_infos" class="col-10">
-        <span class="align-middle">Prochaine session dans <%= my_season.start_in? %> jours</span>
-      </div>
-      <div id="arrow" class="col-2">
-        <%= link_to user_theme_seasons_path(the_user: current_user.id, the_theme: theme.id), method: "post" do %>
-          <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
-        <%end%>
+      <div class="row justify-content-between">
+        <% my_season = Season.where(theme_id: theme.id).where("start_date > ?", Time.now).order(:start_date).first %>
+        <% if my_season.nil? %>
+        <div id="session_infos" class="col">
+          <span class="align-middle">Une nouvelle session sera bientôt programmée !</span>
+        </div>
+        <% else %>
+        <div id="session_infos" class="col-10">
+          <span class="align-middle">Prochaine session dans <%= my_season.start_in? %> jours</span>
+        </div>
+        <div id="arrow" class="col-2">
+          <%= link_to user_theme_seasons_path(the_user: current_user.id, the_theme: theme.id, the_season: my_season.id), method: "post" do %>
+            <i class="bi bi-caret-right-fill fs-1 text-secondary"></i>
+          <%end%>
+        </div>
+        <% end %>
       </div>
       <% end %>
-    </div>
+    <% else %>
+      <!-- Insert here what to display when page showed ta a 'simple' visitor -->
     <% end %>
   </div>
 </div>
