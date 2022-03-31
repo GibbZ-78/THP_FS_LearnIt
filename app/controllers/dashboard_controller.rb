@@ -1,10 +1,6 @@
 class DashboardController < ApplicationController
-  
-  # Invoking DEVISE to benefit from "user_signed_in?" and "current_user" helpers
   before_action :authenticate_user!
   
-  # JBV - Proposition d'approche du branchement vers le dashboard dédié à chaque population
-  #       TO DO: Vérifier adéquation des code HTTP de redirection / erreur
   def index
     if !user_signed_in?
       puts "DEBUG - Entering 'dashboard#index' with a non-connected user"
@@ -30,21 +26,18 @@ class DashboardController < ApplicationController
   end
 
   def student
-    #Affichage des thèmatiques liées au user actuel
     @id = current_user.id
     @themes_du_user = UserThemeSeason.where(user_id: @id)
     
     respond_to do |format|
       format.html { }
-      # format.js { @themes_du_user }
-      format.js {  }
+      format.js { }
     end
   end
 
   def mentor
   end
 
-  # Manages access to "Admin Dashboard"
   def admin
     if !user_signed_in? || current_user.what_role? != "admin"
       puts "DEBUG - Entering 'dashboard#admin' with a non-connected user >> Redirecting to site root and status 401." 
