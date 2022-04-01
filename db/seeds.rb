@@ -26,16 +26,16 @@ puts
 puts "  > Starts seeding 'Students' information"
 5.times do |x|
 	xstr = x+1 < 9 ? "0#{x+1}" : (x+1).to_s 
-  User.create(#first_name: Faker::Name.first_name, 
-              #last_name: Faker::Name.last_name, 
+  User.create(first_name: Faker::Name.first_name, 
+              last_name: Faker::Name.last_name, 
               password: "THP2022", 
               email: "student_#{xstr}@yopmail.com", 
-              #birthdate: Faker::Date.birthday(min_age: 16, max_age: 100),
-              #gender: Faker::Gender.binary_type,
-              #photo:"student_#{xstr}.jpg",
+              birthdate: Faker::Date.birthday(min_age: 16, max_age: 100),
+              gender: Faker::Gender.binary_type,
+              photo_url:"student_#{xstr}.jpg",
               role:0)
-  #puts "  > Student n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
-  puts "  > [Limited] Student n°: #{User.last.id} - email: #{User.last.email} - encrypted_password: #{User.last.encrypted_password}"
+  puts "  > [Full version] Student n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
+  #puts "  > [Limited version] Student n°: #{User.last.id} - email: #{User.last.email} - encrypted_password: #{User.last.encrypted_password}"
 end
 puts "  > Finished seeding 'Students'"
 
@@ -43,28 +43,28 @@ puts "  > Finished seeding 'Students'"
 puts "  > Starts seeding 'Mentors' information"
 5.times do |x|
 	xstr = x+1 < 9 ? "0#{x+1}" : (x+1).to_s 
-  User.create(#first_name: Faker::Name.first_name, 
-              #last_name: Faker::Name.last_name, 
+  User.create(first_name: Faker::Name.first_name, 
+              last_name: Faker::Name.last_name, 
               password: "THP2022", 
               email: "mentor_#{xstr}@yopmail.com", 
-              #birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
-              #gender: Faker::Gender.binary_type,
-              #photo:"mentor_#{xstr}.jpg",
+              birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
+              gender: Faker::Gender.binary_type,
+              photo_url:"mentor_#{xstr}.jpg",
               role:1)
-	#puts "  > Mentor n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
-  puts "  > [Limited] Mentor n°: #{User.last.id} - email: #{User.last.email} - password: #{User.last.encrypted_password}"
+	puts "  > [Full version] Mentor n°: #{User.last.id} - first_name: #{User.last.first_name} - last_name: #{User.last.last_name} - email: #{User.last.email} - password: #{User.last.encrypted_password} - birthdate: #{User.last.birthdate}"
+  #puts "  > [Limited version] Mentor n°: #{User.last.id} - email: #{User.last.email} - password: #{User.last.encrypted_password}"
 end
 puts "  > Finished seeding 'Mentors'"
 
 # Seeding DB with 1 administrator
 puts "  > Starts seeding unique admin information"
-User.create(#first_name: "admin", 
-            #last_name: "admin", 
+User.create(first_name: "admin", 
+            last_name: "admin", 
             password: "THP2022", 
             email: "learnit_admin@yopmail.com",
-            #birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
-            #gender: Faker::Gender.binary_type,
-            #photo:"photo_admin.jpg",
+            birthdate: Faker::Date.birthday(min_age: 18, max_age: 100),
+            gender: Faker::Gender.binary_type,
+            photo_url:"photo_admin.jpg",
             role:2)
 puts "  > Finished seeding the one and only 'Admin'"
 
@@ -76,12 +76,12 @@ puts "  > Finished seeding the one and only 'Admin'"
 
 puts "  > Starts seeding 'memberships'"
 User.all.each do |my_user|
-  if my_user.role != 2
-    Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between(from: 2.years.ago, to: 1.day.ago))
-    puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
-  end
-end
-puts "  > Finished seeding 'memberships'"
+   if my_user.role != 2
+     Membership.create(user_id: my_user.id, subscription_date: Faker::Date.between(from: 2.years.ago, to: 1.day.ago))
+     puts "    - Membership n°: #{Membership.last.id} - user: #{my_user.email}(id: #{my_user.id}) - subscribed on: #{Membership.last.subscription_date}"
+   end
+ end
+ puts "  > Finished seeding 'memberships'"
 
   ########################################
  #                                        #
@@ -194,7 +194,8 @@ puts "    - Chapter n°: #{Chapter.last.id} - title: #{Chapter.last.title} - con
 puts "  > Finished seeding 'chapters'"
 
 puts "  > Starts seeding 'courses'"
-my_sentences_nbr = 10                 # Unit length (in sentences) of the paragraphs generated by Faker as course content
+
+my_sentences_nbr = 60                 # Unit length (in sentences) of the paragraphs generated by Faker as course content
 
 my_chapter = Chapter.find_by(title:"Le Ruby magique")
 my_theme = Theme.find(my_chapter.theme_id)
@@ -345,6 +346,10 @@ puts "  > Finished seeding 'quizzes'"
  #                                   #
   ###################################
 
+puts
+puts "SEEDING - Creation of the 'season' logic contents and linking it to our students and mentors"
+puts
+
 puts "  > Starts seeding 'seasons'"
 my_theme = Theme.find_by(title: "Développement Web")
 puts "    - Starts creating 5 seasons for theme '#{my_theme.title}'"
@@ -385,21 +390,91 @@ my_users = User.where.not(role:2)
 min_season = Season.first.id
 my_users.each do |user_counter|
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season..min_season+4))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+5..min_season+9))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+10..min_season+14))
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
   UserSeason.create(user_id: user_counter.id, season_id: rand(min_season+15..min_season+19))
-  puts "    - Another 4 'user_seasons' instantiated"
+  puts "    - Added season '#{Season.find(UserSeason.last.season_id).name}' (ending on '#{Season.find(UserSeason.last.season_id).end_date}') to user nr. #{user_counter.id} (#{user_counter.email})"
 end
 puts "  > Finished seeding 'user_seasons'"
 
-puts "  > Starts seeding 'user_theme_seasons'"
+  ####################################
+ #                                    #
+#  CREATION OF THE 3-LEVEL UTSCC TREE  #
+ #                                    #
+  ####################################
+
+puts
+puts "SEEDING - Creation of the UTSCC 3-level tree to store completion(-rate) of each user on each theme / chapter / course of each season"
+puts
+
+puts "  > Starts seeding 'user_theme_seasons (UTS)'"
 UserSeason.all.each do |my_us|
   my_season = Season.find(my_us.season_id)
+  my_completion = my_season.start_date > Time.now ? 0 : rand(0..100)
   my_theme = Theme.find(my_season.theme_id)
-  UserThemeSeason.create(user_id:my_us.user_id, season_id: my_us.season_id, theme_id: my_theme.id, completion_rate: rand(0..100)) 
-  puts "    - Another 'user_theme_seasons' created and filled-up"
+  UserThemeSeason.create(user_id:my_us.user_id, season_id: my_us.season_id, theme_id: my_theme.id, completion_rate: my_completion) 
+  puts "    - Link 'user_theme_seasons' nr. #{UserThemeSeason.last.id} created between user nr. #{my_us.user_id} (#{User.find(my_us.user_id).email}) and season '#{my_season.name}'"
 end
-puts "  > Finished seeding 'user_theme_seasons'"
+puts "  > Finished seeding 'user_theme_seasons (UTS)'"
+
+puts "  > Starts seeding 'user_theme_seasons_chapters (UTSC)'"
+UserThemeSeason.all.each do |my_uts|
+  my_theme = Theme.find(my_uts.theme_id)
+  my_chapters = Chapter.where(theme_id:my_theme.id)
+  my_season = Season.find(my_uts.season_id)
+  my_chapters.each do |my_chapter|
+    my_completion = my_season.start_date > Time.now ? 0 : rand(0..100)
+    UserThemeSeasonChapter.create(user_theme_season_id:my_uts.id, chapter_id:my_chapter.id, completion_rate:my_completion)
+    puts "      + Adding link with 'user_theme_season' nr. #{my_uts.id} and info from chapter '#{my_chapter.title} (#{my_chapter.id})' to 'user_theme_season_chapter' nr. #{UserThemeSeasonChapter.last.id}"
+  end
+end
+puts "  > Finished seeding 'user_theme_season_chapters (UTSC)'"
+
+puts "  > Starts seeding 'utsc_courses'"
+UserThemeSeasonChapter.all.each do |my_utsc|
+  my_courses = Course.where(chapter_id:my_utsc.chapter_id)
+  my_uts = UserThemeSeason.find(my_utsc.user_theme_season_id)
+  my_season = Season.find(my_uts.season_id)
+  my_courses.each do |my_course|
+    my_completion = my_season.start_date > Time.now ? false : Faker::Boolean.boolean
+    UtscCourse.create(user_theme_season_chapter_id: my_utsc.id, course_id:my_course.id, completed:my_completion)
+    puts "      + Adding link with 'user_theme_season_chapter' nr. #{my_utsc.id} and info from course '#{my_course.title} (#{my_course.id})' to 'utsc_course' nr. #{UtscCourse.last.id}"
+  end
+end
+puts "  > Finished seeding 'utsc_courses'"
+
+  #################################################################
+ #                                                                 #
+#  CREATION OF GROUPS (BY SEASON) AND INTEGRATION OF RELATED USERS  #
+ #                                                                 #
+  #################################################################
+
+puts
+puts "SEEDING - Creation of 2 'groups' within each 'seasons' then randomly attributing related season's user to one of the two group"
+puts
+
+puts "  > Starts seeding 'groups' and related 'users_groups'"
+Season.all.each do |my_season|
+  my_1st_mentor = User.where(role:1).sample
+  my_2nd_mentor = User.where(role:1).sample
+  Group.create(season_id: my_season.id, user_id: my_1st_mentor.id)    # 'user_id' stands for the Mentor ID
+  my_1st_group_id = Group.last.id
+  Group.create(season_id: my_season.id, user_id: my_2nd_mentor.id)    # 'user_id' stands for the Mentor ID
+  my_2nd_group_id = Group.last.id
+  my_user_seasons = UserSeason.where(season_id: my_season.id)
+  my_user_seasons.each do |my_user_season|
+    if rand(1..2) == 1
+      UsersGroup.create(user_id: my_user_season.user_id, group_id: my_1st_group_id)
+    else
+      UsersGroup.create(user_id: my_user_season.user_id, group_id: my_2nd_group_id)
+    end
+    puts "    - User #{User.find(my_user_season.user_id).first_name} #{User.find(my_user_season.user_id).last_name} (#{my_user_season.user_id}) will be in group #{UsersGroup.last.group_id} of season '#{my_season.name}' (#{my_season.id})"
+  end
+end
+puts "  > Finished seeding 'groups' and related 'users_groups'"
 
 puts
 puts "SEEDING - This is the end... At last !"

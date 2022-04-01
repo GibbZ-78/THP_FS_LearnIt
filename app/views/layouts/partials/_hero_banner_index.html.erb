@@ -1,13 +1,23 @@
-<section class="row justify-content-between mb-5 bg-primary">
-    <div class="col-5 mx-5 my-3 p-2"> 
-        <%= image_tag("banner_index.jpg", alt:"Photo de startupeurs", class:"opacity-50 rounded", width:"500") %>
+<section class="row py-5 mb-5 bg-primary">
+    <div class="col-md-6 text-center"> 
+        <%= image_tag("banner_index.jpg", alt:"Photo de startupeurs", class:"img-fluid", width:"500") %>
     </div>
-    <div class="col-5 mx-5 my-3 pt-5">
-        <p class="h1 text-light"><span class="text-secondary">LearnIt!</span>, la nouvelle plateforme web d'apprentissage.</p>
-        <p class="lead text-light">Vos règles, votre rythme, votre communauté !</p>
-        <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4 me-md-2 text-light">S'inscrire</button>
-            <button type="button" class="btn btn-outline-secondary btn-lg px-4 text-light">Se connecter</button>
+    <div class="col-md-6">
+        <h1 class="text-secondary ">LearnIt!</h1>
+        <h2 class="text-light">La nouvelle plateforme web d'apprentissage</h2>
+        <p class="text-light lead fs-4">
+            <%if current_user %>
+            <%= current_user.first_name %>, suivez
+            <%end%> 
+            Vos règles, Votre rythme, Votre communauté !
+        </p>
+        <div class="row">
+        <div class="col-md-8 d-flex justify-content-center pt-5">
+            <%if !user_signed_in? %>
+                <%= link_to("S'inscrire",new_user_registration_path, class:"btn btn-outline-secondary btn-lg text-light mx-3", method:"get") %>
+                <%= link_to("Se connecter",new_user_session_path, class:"btn btn-outline-secondary btn-lg text-light mx-3", method:"get") %>
+            <%end%>
+        </div>
         </div>
     </div>
 </section>

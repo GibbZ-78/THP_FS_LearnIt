@@ -1,2 +1,33 @@
-<h1>Dashboard#student</h1>
-<p>Find me in app/views/dashboard/student.html.erb</p>
+<section>
+  <%= render "layouts/partials/dashboard_banner" %>
+</section>
+
+<h2 class="text-center my-3">Bienvenue sur votre espace <%= current_user.first_name %></h2>
+
+<section class="container mb-5">
+  <h3 class="mb-5 orange_underline">Vos cursus</h3>
+  <div class="row justify-content-between">
+    <%if @themes_du_user.length == 0 %>
+      <%= render 'layouts/partials/add_theme_card' %>
+    <%else%>
+      <%@themes_du_user.each do |uts| 
+        uts_theme = Theme.find(uts.theme_id)
+        uts_season = Season.find(uts.season_id)%>
+        <%= render 'layouts/partials/user_theme_card', theme: uts_theme, season: uts_season %>
+      <%end%>
+    <%end%>
+  </div>
+</section>
+
+<section id="user_theme_chapters" class="container-fluid bg-light_pulpit py-5"> <!-- Vos cursus -->
+  <div class="container">
+    <h3 class="mb-5 orange_underline">Détails</h3>
+    <div class="row d-flex justify-content-between">
+
+    <div id="chapters_container">
+      <!-- Affiche la partials des chapitres d'un theme en fonction du theme selectionné-->
+    </div>
+
+    </div>
+  </div>
+</section>

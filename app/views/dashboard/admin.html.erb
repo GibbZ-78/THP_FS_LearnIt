@@ -1,2 +1,340 @@
-<h1>Dashboard#admin</h1>
-<p>Find me in app/views/dashboard/admin.html.erb</p>
+<!-- Headings ~ Full width with 1 unique column -->
+<section class=" col text-center py-3">
+  <h3 class="orange_underline">
+    <% if !current_user.gender.nil? && !current_user.first_name.nil? && !current_user.last_name.nil? %>
+      <% my_hello = current_user.gender == "Female" ? "la bienvenue sur votre dashboard [Administrateur], Madame" : "le bienvenu sur votre dashboard [Administratrice], Monsieur" %>
+      Soyez <%= my_hello %> <%= current_user.first_name.capitalize %> <%= current_user.last_name.upcase %> !
+    <% else %>
+      Bienvenue sur le dashboard [Administrateur] de LearnIt! !
+    <% end %>
+  </h3>
+</section>
+
+<!-- Upper Section ~ General figures & data visualizations - Full width broken horizontally into 5 cards -->
+<section class="row justify-content-between g-0">
+  
+  <!-- Card 1/5 ~ Members' info (Users with roles "student(0)", "mentor(1)" or "admin(2)" -->
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 me-2">
+    <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
+      <div class="text-start fw-bold">
+        <i class="bi bi-person-hearts fs-4"></i>
+      </div>
+      <div class="text-center fw-bold">
+        Membres
+      </div>
+      <div class="text-end fw-bold fs-4 rounded bg-light px-1 opacity-75">
+        <%=User.all.count%>
+      </div>
+    </div>
+    <div class="d-flex bg-white p-2">
+      <ul>
+        <li><strong><%=User.where(role:0).count%></strong> étudiant(e)(s)</li>
+        <li><strong><%=User.where(role:1).count%></strong> mentor(s)</li>
+        <li><strong><%=User.where(role:2).count%></strong> administrateur(trice)(s)</li>
+      </ul>
+    </div>
+    <div class="d-flex bg-white p-2">
+      <p class="fw-lighter fst-italic">Représentant <strong><%= Membership.count %></strong> souscriptions.</p>
+    </div>
+    <div class="d-flex bg-white p-2 mb-auto">
+      <p class="fw-lighter fst-italic">Dernière inscription <strong><%= User.last.created_at.strftime('%A %d %B %Y à %Hh%M') %></strong>.</p>
+    </div>
+    <div class="rounded-bottom p-2 list-group-item-action list-group-item-light border-top">
+      <%= link_to("#", method:"get", class:"text-primary orange_underline") do %>
+        Gérer les membres
+        <i class="bi bi-chevron-double-right fw-bold text-secondary"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Card 2/5 ~ Pedagogical objects' info (Themes, Chapters, Courses, Quizzes...) -->
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
+    <div class="d-flex justify-content-between rounded-top bg-primary text-secondary p-2">
+      <div class="text-start fw-bold">
+        <i class="bi bi-mortarboard-fill fs-4"></i>
+      </div>
+      <div class="text-center fw-bold">
+        Cursus
+      </div>
+      <div class="text-end fw-bold fs-4 rounded bg-light px-1 opacity-75">
+        <%= Theme.count + Chapter.count + Course.count + Quiz.count + QuestionAnswer.count %>
+      </div>
+    </div>
+    <div class="d-flex bg-white mb-auto p-2">
+      <ul>
+        <li><strong><%=Theme.count%></strong> thème(s)</li>
+        <li><strong><%=Chapter.count%></strong> chapitre(s)</li>
+        <li><strong><%=Course.count%></strong> cours</li>
+        <li><strong><%=Quiz.count%></strong> questionnaire(s)</li>
+        <li><strong><%=QuestionAnswer.count%></strong> questions/réponses</li>
+      </ul>
+    </div>
+    <div class="rounded-bottom p-2 list-group-item-action list-group-item-light border-top">
+      <span class="text-primary orange_underline">
+        Gérer les :
+        <ul>
+          <li><%= link_to("thèmes", themes_path, method:"get", class:"text-primary orange_underline") %> <i class="bi bi-chevron-double-right fw-bold text-secondary"></i></li>
+          <li><%= link_to("chapitres", chapters_path, method:"get", class:"text-primary orange_underline") %> <i class="bi bi-chevron-double-right fw-bold text-secondary"></i></li>
+          <li><%= link_to("cours", courses_path, method:"get", class:"text-primary orange_underline") %> <i class="bi bi-chevron-double-right fw-bold text-secondary"></i></li>
+          <li><%= link_to("questionnaires", quizzes_path, method:"get", class:"text-primary orange_underline") %> <i class="bi bi-chevron-double-right fw-bold text-secondary"></i></li>
+          <li><%= link_to("questions-réponses", question_answers_path, method:"get", class:"text-primary orange_underline") %> <i class="bi bi-chevron-double-right fw-bold text-secondary"></i></li>
+        </ul>
+      </span>
+    </div>
+  </div>
+
+  <!-- Card 3/5 ~ Consolidated completion info by themes / chapters / courses -->
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
+    <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
+      <div class="text-start fw-bold">
+        <i class="bi bi-bar-chart-line-fill fs-4"></i>
+      </div>
+      <div class="text-center fw-bold">
+        Progression
+      </div>
+      <div class="text-end fw-bold fs-4 rounded bg-light px-1 opacity-75">
+        <%= (UserThemeSeason.sum(:completion_rate) + UserThemeSeasonChapter.sum(:completion_rate) + UtscCourse.where(completed:true).count*100) / (UserThemeSeason.count + UserThemeSeasonChapter.count + UtscCourse.count) %><span class="fst-italic fs-6">%</span>
+      </div>
+    </div>
+    <div class="d-flex bg-white p-2">
+      <ul>
+        <li><strong><%= (UserThemeSeason.sum(:completion_rate).to_f / UserThemeSeason.count).round(2) %></strong>% de thèmes complétés</li>
+        <li><strong><%= (UserThemeSeasonChapter.sum(:completion_rate).to_f / UserThemeSeasonChapter.count).round(2) %></strong>% de chapitres complétés</li>
+        <li><strong><%= ((UtscCourse.where(completed:true).count.to_f * 100) / UtscCourse.count).round(2) %></strong>% de cours complétés</li>
+      </ul>
+    </div>
+    <div class="d-flex bg-white p-2 mb-auto">
+      <p class="fw-lighter fst-italic">Et un taux croissant de réussite sur les <strong><%= Season.count %></strong> dernières saisons.</p>
+    </div>
+    <div class="rounded-bottom p-2 list-group-item-action list-group-item-light border-top">
+      <%= link_to("#", method:"get", class:"text-primary orange_underline") do %>
+        Gérer les résultats
+        <i class="bi bi-chevron-double-right fw-bold text-secondary"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Card 4/5 ~ Groups' infos -->
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
+    <div class="d-flex justify-content-between rounded-top bg-primary text-secondary p-2">
+      <div class="text-start fw-bold">
+        <i class="bi bi-people-fill fs-5"></i><i class="bi bi-people-fill fs-4 ms-n1"></i>
+      </div>
+      <div class="text-center fw-bold">
+        Groups
+      </div>
+      <div class="text-end fw-bold fs-4 rounded bg-light px-1 opacity-75">
+        <%= Group.count %>
+      </div>
+    </div>
+    <div class="d-flex bg-white mb-auto p-2">
+      <ul>
+        <li><strong><%=Group.count%></strong> groupes au total</li>
+        <% 
+          my_open_seasons = Season.where("start_date <= ? and end_date > ?", Time.now(), Time.now()) 
+          my_closed_seasons = Season.where("end_date <= ?", Time.now())
+          my_future_seasons = Season.where("start_date > ?", Time.now())
+        %>
+        <li><strong><%=Group.where(season_id: my_open_seasons).count%></strong> groupes actifs</li>
+        <li><strong><%=my_open_seasons.count%></strong> saisons en cours</li>
+        <li><strong><%=my_closed_seasons.count%></strong> saisons closes</li>
+        <li><strong><%=my_future_seasons.count%></strong> saisons à venir</li>
+      </ul>
+    </div>
+    <div class="rounded-bottom p-2 list-group-item-action list-group-item-light border-top">
+      <%= link_to("#", method:"get", class:"text-primary orange_underline") do %>
+        Gérer les groupes
+        <i class="bi bi-chevron-double-right fw-bold text-secondary"></i>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Card 5/5 ~ Extract of the 5-10 most recent Private Messages -->
+  <!-- [BONUS] Hence still faking it as of March 30 but should / could be part of LearnIt! in the future -->
+  <div class="d-flex flex-column col rounded shadow border g-0 p-1 ms-2">
+    <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
+      <div class="text-start fw-bold">
+        <i class="bi bi-chat-right-text fs-4"></i>
+      </div>
+      <div class="text-center fw-bold">
+        Messages <span class="fs-6 fst-italic">[BONUS hence FAKE]</span>
+      </div>
+      <div class="text-end fw-bold fs-4 rounded bg-light px-1 opacity-75">
+        <%= "777" %>
+      </div>
+    </div>
+    <div class="d-flex bg-white p-2 mb-auto">
+      <table class="table table-hover table-stripe small">
+        <thead>
+          <tr>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> De :</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> A :</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Date :</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Contenu :</th>
+          </tr>
+        <thead>
+        <tbody>
+          <tr>
+            <td><%=User.first.first_name%></td>
+            <td><%=User.last.first_name%></td>
+            <td>28 mars 2022</td>
+            <td>Bla bla bla</td>
+          </tr>
+          <tr>
+            <td><%=User.all[1].first_name%></td>
+            <td><%=User.all[2].first_name%></td>
+            <td>27 mars 2022</td>
+            <td>This is just a test</td>
+          </tr>
+          <tr>
+            <td><%=User.all[2].first_name%></td>
+            <td><%=User.all[3].first_name%></td>
+            <td>20 mars 2022</td>
+            <td>Another question</td>
+          </tr>
+          <tr>
+            <td><%=User.all[5].first_name%></td>
+            <td><%=User.all[3].first_name%></td>
+            <td>19 mars 2022</td>
+            <td>Still here?</td>
+          </tr>
+        <tbody>
+      </table>
+    </div>
+    <div class="rounded-bottom p-2 list-group-item-action list-group-item-light border-top">
+      <%= link_to("#", method:"get", class:"text-primary orange_underline") do %>
+        Gérer les messages
+        <i class="bi bi-chevron-double-right fw-bold text-secondary"></i>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+<!-- End of upper section -->
+
+<hr/>
+
+<!-- Lower section ~ Access to extracts of LearnIt! data - Full width broken into 2 columns -->
+<section class="row justify-content-around g-0">
+  
+  <!-- Users' list -->
+  <div class="col-9 rounded bg-light shadow border g-0 p-1 me-2">
+    <div class="btn-group">
+      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Filtrer par...
+      </button>
+      <ul class="dropdown-menu">
+        <li class="dropdown-item">IDs</li>
+        <li class="dropdown-item">Noms</li>
+        <li class="dropdown-item">Prénoms</li>
+        <li class="dropdown-item">Date de naissance</li>
+      </ul>
+    </div>
+    <div>
+      <table class="table table-hover table-stripe small">
+        <thead>
+          <tr>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> ID</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Nom</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Prénom</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Genre</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Anniversaire</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Rôle</th>
+            <th><i class="bi bi-chevron-double-down text-secondary"></i> Inscription</th>
+          </tr>
+        <thead>
+        <tbody>
+        <% User.where.not(role:2).each do |my_user| %>
+          <% Membership.where(user_id:my_user.id).each do |my_membership| %>
+          <tr>
+            <td><%= my_user.id %></td>
+            <td><%= my_user.last_name.upcase %></td>
+            <td><%= my_user.first_name.capitalize %></td>
+            <td><%= my_user.gender.capitalize %></td>
+            <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
+            <td><%= my_user.role %></td>
+            <td>
+              <%= my_membership.subscription_date.strftime('%d.%m.%Y') %>
+              <%if my_membership.subscription_date > (Time.now() - 1.year) 
+                  mbrshp_status_color = "success"
+                  mbrshp_status_msg = "OK"
+                else
+                  mbrshp_status_color = "danger"
+                  mbrshp_status_msg = "KO"
+                end %>
+              <span class="text-<%=mbrshp_status_color%>"> (<%=mbrshp_status_msg%>)</span>
+            </td>
+          </tr>
+          <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>  
+
+  <!-- Themes' list-->
+  <div class="col rounded bg-light shadow border g-0 p-1 ms-2">
+    <h2 class="orange_underline text-center">Thèmes</h2>
+    <div class="accordion" id="themeAccordion">
+      <% Theme.order(:id).all.each do |my_theme| %>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="themeheading<%=my_theme.id%>">
+          <button class="accordion-button bg-secondary text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#themecollapse<%=my_theme.id%>" aria-expanded="<%=(my_theme.id == Theme.first.id).to_s%>" aria-controls="themecollapse<%=my_theme.id%>">
+            <%= my_theme.title%>
+          </button>
+        </h2>
+        <div id="themecollapse<%=my_theme.id%>" class="accordion-collapse collapse" aria-labelledby="themeheading<%=my_theme.id%>" data-bs-parent="#themeAccordion">
+          <div class="accordion-body">
+            <p><%= my_theme.content %></p>
+            <div class="row justify-content-between text-center">
+              <div class="col-4">
+                <%= link_to("Editer", edit_theme_path(my_theme.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+              </div>
+              <div class="col-4">
+                <%= link_to("Créer", new_theme_path, class:"btn btn-sm btn-light_pulpit") %>
+              </div>
+              <div class="col-4">
+                <%= link_to("Suppr.", theme_path(my_theme.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le thème '#{my_theme.title} (n° #{my_theme.id})' ?" }, class:"btn btn-sm btn-danger") %>
+              </div>
+            </div>
+            <hr/>
+            <% if Chapter.order(:id).where(theme_id:my_theme.id).count > 0%>
+            <div class="accordion" id="chapterAccordion">
+              <% Chapter.order(:id).where(theme_id:my_theme.id).each do |my_chapter| %>
+              <div class="accordion-item">
+                <h4 class="accordion-header" id="chapterheading<%=my_chapter.id%>">
+                <button class="accordion-button bg-primary text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#chaptercollapse<%=my_chapter.id%>" aria-expanded="<%=(my_chapter.id == Chapter.order(:id).where(theme_id:my_theme.id).first.id).to_s%>" aria-controls="chaptercollapse<%=my_chapter.id%>">
+                  <%= my_chapter.title%>
+                </button>
+                </h4>
+              </div>
+              <div id="chaptercollapse<%=my_chapter.id%>" class="accordion-collapse collapse" aria-labelledby="chapterheading<%=my_chapter.id%>" data-bs-parent="#chapterAccordion">
+                <div class="accordion-body">
+                  <p><%= my_chapter.content %></p>
+                  <div class="row justify-content-between">
+                    <div class="col-4">
+                      <%= link_to("Editer", edit_chapter_path(my_chapter.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+                    </div>
+                    <div class="col-4">
+                      <%= link_to("Créer", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %>
+                    </div>
+                    <div class="col-4">
+                      <%= link_to("Suppr.", chapter_path(my_chapter.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le chapitre '#{my_chapter.title} (n° #{my_chapter.id})' ?" }, class:"btn btn-sm btn-danger") %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+            <% else %>
+            <p class="fst-italic text-center">Pas encore de chapitre dans ce thème... <%= link_to("Créer le premier chapitre", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+
+</section>
+<!-- End of lower section -->

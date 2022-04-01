@@ -1,0 +1,26 @@
+<%# Chapter horyzontal card %>
+<div class="col-10 bg-primary">
+  <div class="row">
+    <div class="col-md-4 col-lg-3">
+      <div class="image p-5">
+        <% chapter_logo = "chapters_logos/#{chapter.theme.title}/chapter_#{chapter.id}.svg"  %>
+          <%= image_tag(chapter_logo, alt: "Logo du chapitre", class: 'img-fluid') rescue image_tag('SVG_Logo.svg', alt: "Logo du chapitre", class: 'img-fluid') %>
+      </div>
+    </div>
+    <div class="col-auto d-flex flex-column justify-content-center align-items-start">
+      <h4 class="text-light"><%=  chapter.title %></h4>
+      <p class="text-light"><%=  chapter.content %></p>
+    </div>
+  </div>
+</div>
+<div class="col-2">
+  <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
+    <p class="fs-1"><%= UserThemeSeasonChapter.find(chapter.id).completion_rate %> %</p>
+    <%my_courses = UtscCourse.where(user_theme_season_chapter_id: UserThemeSeasonChapter.find(chapter.id)).first %>
+    <%if my_courses.nil?%>
+      <p>Pas de cours</p>
+    <%else%>
+      <%= link_to 'Poursuivre', course_path(my_courses), class: 'text-deep_blue' %>
+    <%end%>
+  </div>
+</div>

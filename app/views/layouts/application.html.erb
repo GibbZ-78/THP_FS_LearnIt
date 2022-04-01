@@ -9,6 +9,10 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <%= javascript_include_tag 'application' %>
+    
+    <!-- Adding STRIPE javascript library needed by the new payment form model -->
+    <script src="https://js.stripe.com/v3/"></script>
+
     <%= favicon_link_tag asset_path('books.png') %>
   </head>
   <body>  

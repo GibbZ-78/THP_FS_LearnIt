@@ -8,19 +8,35 @@ class ChaptersController < ApplicationController
     @chapter = Chapter.find(params[:id]) 
   end
 
-  #def new
-  #end
+  def new
+    @chapter = Chapter.new
+  end
 
-  #def update
-  #end
+  def create
+    Chapter.create(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def new
-  #end
+  def edit
+    @chapter = Chapter.find(params[:id]) 
+  end
 
-  #def create
-  #end
+  def update
+    @chapter = Chapter.find(params[:id])
+    @chapter.update(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def destroy
-  #end
+  def destroy
+    @chapter = Chapter.find(params[:id])
+    @chapter.destroy
+    redirect_to dashboard_admin_path
+  end
+
+  private
+
+  def clean_params
+    params.require(:chapter).permit(:title, :content, :theme_id)
+  end
 
 end

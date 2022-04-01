@@ -6,23 +6,42 @@ class CoursesController < ApplicationController
 
   def show
     @course = Course.find(params[:id])
-    @course_chapter = @course.chapter  #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
-    @course_theme = @course.chapter.theme  #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
+    @course_chapter = @course.chapter
+    @courses = Course.where(chapter_id:@course_chapter.id)
+    #@courses_of_the_same_chapter = Course.where(chapter_id:@courses.chapter_id) #test
+    #@next_course = Course.where(chapter_id:@courses.chapter_id, course_id:(@course.id +1)) #test for the button "next course"
+    @next_course = Course.find_by_id(params[:id].to_i + 1)
   end
 
-  #def edit
-  #end
+  def new
+    @course = Course.new
+  end
 
-  #def update
-  #end
+  def create
+    Course.create(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def new
-  #end
+  def edit
+    @course = Course.find(params[:id]) 
+  end
 
-  #def create
-  #end
+  def update
+    @course = Course.find(params[:id])
+    @course.update(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def destroy
-  #end
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    redirect_to dashboard_admin_path
+  end
+
+  private
+
+  def clean_params
+    params.require(:chapter).permit(:title, :content, :chapter_id)
+  end
 
 end

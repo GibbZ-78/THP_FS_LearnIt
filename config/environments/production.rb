@@ -63,12 +63,6 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "learnit_#{Rails.env}"
 
-  config.action_mailer.perform_caching = false
-
-  # Ignore bad email addresses and do not raise email delivery errors.
-  # Set this to true and configure the email server for immediate delivery to raise delivery errors.
-  # config.action_mailer.raise_delivery_errors = false
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -91,4 +85,33 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # BEGIN - LearnIt! specific SMTP and mailer configuration
+  # Default URL options added after devise:install
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # Activate mailing error raising (default status is muted with default value 'false')
+  config.action_mailer.raise_delivery_errors = true
+
+  # Do NOT cache sent mails (default value 'false' kept as is)
+  config.action_mailer.perform_caching = false
+
+  # Use STMP as mail sending protocol (see detailed configuration below)
+  config.action_mailer.delivery_method = :smtp
+
+  # Activate effective mail sending (default value 'false' prevents any mail departure)
+  config.action_mailer.perform_deliveries = true
+
+  # Detailed SMTP configuration to perform mail sending through SENGRID (https://app.sendgrid.com/)
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SENDGRID_LOGIN'],
+    :password => ENV['SENDGRID_PWD'],
+    :domain => 'https://welearnit.herokuapp.com/',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+  # END - LearnIt! specific SMTP and mailer configuration
+
 end

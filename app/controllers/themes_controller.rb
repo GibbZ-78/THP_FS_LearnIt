@@ -5,22 +5,38 @@ class ThemesController < ApplicationController
   end
 
   def show
-    @theme = Theme.find(params[:id]) 
+    @theme = Theme.find(params[:id])
   end
 
-  #def edit
-  #end
+  def new
+    @theme = Theme.new
+  end
 
-  #def update
-  #end
+  def create
+    Theme.create(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def new
-  #end
+  def edit
+    @theme = Theme.find(params[:id])
+  end
 
-  #def create
-  #end
+  def update
+    @theme = Theme.find(params[:id])
+    @theme.update(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def destroy
-  #end
+  def destroy
+    @theme = Theme.find(params[:id])
+    @theme.destroy
+    redirect_to dashboard_admin_path
+  end
+
+  private
+
+  def clean_params
+    params.require(:theme).permit(:title, :content)
+  end
 
 end
