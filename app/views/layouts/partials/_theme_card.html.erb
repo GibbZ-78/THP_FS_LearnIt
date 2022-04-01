@@ -1,6 +1,6 @@
 <div class="card col-md-4 col-lg-3 m-3 bg-primary text-light">
-  <% my_theme_image_url = theme.id < 10 ? "theme_0#{theme.id}.jpg" : "theme_#{theme.id}.jpg" %>
-  <%= image_tag(my_theme_image_url, alt: "Illustration du thème '#{theme.title}' (#{theme.id})", class: "card-img-top") %>
+  <% theme_image_url = theme.id < 10 ? "theme_0#{theme.id}.jpg" : "theme_#{theme.id}.jpg" %>
+  <%= image_tag(theme_image_url, alt: "Illustration du thème '#{theme.title}' (#{theme.id})", class: "card-img-top") %>
   <div class="card-body mt-2">
     <h5 class="card-title"><%= theme.title %></h5>
     <p class="card-text mt-4 mb-0">
@@ -24,7 +24,7 @@
           <%= link_to("Créer", new_theme_path, class:"btn btn-sm btn-light_pulpit") %>
         </div>
         <div class="col-4">
-          <%= link_to("Suppr.", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
+          <%= link_to("Suppr.", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger", data: {confirm: "Etes-vous certain(e) de vouloir effacer le thème n°#{theme.id} : '#{theme.title}' ?"}) %>
         </div>
       </div>
       <% else %>

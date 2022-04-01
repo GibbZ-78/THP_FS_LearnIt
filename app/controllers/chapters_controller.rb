@@ -1,5 +1,7 @@
 class ChaptersController < ApplicationController
 
+  before_action :require_admin
+
   def index
     @chapters = Chapter.all
   end
@@ -37,6 +39,12 @@ class ChaptersController < ApplicationController
 
   def clean_params
     params.require(:chapter).permit(:title, :content, :theme_id)
+  end
+
+  def require_admin
+    if !user_signed_in? || current_user.what_role? != "admin"
+      redirect_to root_path
+    end
   end
 
 end

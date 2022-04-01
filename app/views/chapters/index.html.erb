@@ -1,11 +1,12 @@
 <section class="row justify-content-center g-0">
   <%= render("layouts/partials/hero_banner_learnit") %>
+  <h2 class="orange_underline text-center">NOS CHAPITRES</h2>
 </section>
 
 <hr>
 
-<section class="row justify-content-around g-0">
-    <% @chapters.each do |one_chapter| %>
-      
-    <% end %>
+<section class="row justify-content-center g-0">
+  <% @chapters.each do |one_chapter| %>
+    <%= render("layouts/partials/chapter_card", my_chapter: one_chapter) %>
+  <% end %>
 </section>

@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   
+  before_action :require_admin, except: :show
+
   def index
     @courses = Course.all
   end
@@ -40,6 +42,12 @@ class CoursesController < ApplicationController
 
   def clean_params
     params.require(:chapter).permit(:title, :content, :chapter_id)
+  end
+
+  def require_admin
+    if !user_signed_in? || current_user.what_role? != "admin"
+      redirect_to root_path
+    end
   end
 
 end
