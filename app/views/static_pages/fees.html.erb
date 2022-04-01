@@ -1,3 +1,34 @@
 <section class="d-flex justify-content-center">
-  <p class="display-2 text-secondary my-5">Page statique à parfaire en semaine 2 ;-)</p>
+  <div class="pricing-header p-3 mx-auto text-center">
+    <h1 class="display-4 fw-normal">Tarif</h1>
+    <p class="fs-5 text-muted">Nous proposons un tarif unique qui vous donne accès exclusivement pendant 1 an à toute la palette de cours orchestrée par <span class="text-secondary"><b>LearnIt!</b></span>.</p>
+  </div>
 </section>
+
+<section class="row justify-content-center">
+    <div class="col-md-4 text-end px-5">
+      <h2>Notre politique tarifaire</h2>
+      <p>Accéder quand tu le veux, à la fréquence que tu veux, au.x programme.s que tu veux :  c'est la philosophie LearnIt!.</p>
+      <p>Mieux qu'un Canal+ à la demande de l'apprentissage, nous souhaitons proposer un tarif annuel unique pour tous les passionnés et ceux qui ont l'envie d'apprendre.</p>
+      <p>Des solutions de financement seront mises en place très prochainement (Boursier, Pole Emploi, CPF...).</p>
+    </div>  
+    <div class="col-md-5">
+      <div class="card rounded-3 shadow-sm">
+        <div class="card-header py-3">
+          <h4 class="fw-normal text-center">Tarif unique</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title text-center">399€<small class="text-muted fw-light">/an</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li><i class="bi bi-chevron-double-right text-secondary fs-5"></i> Accès à des ressources exclusives</li>
+            <li><i class="bi bi-chevron-double-right text-secondary fs-5"></i> Membre actif d'une communauté de learning</li>
+            <li><i class="bi bi-chevron-double-right text-secondary fs-5"></i> Inter-échanges grâce au peer-programming</li>
+            <li><i class="bi bi-chevron-double-right text-secondary fs-5"></i> Maître de votre emploi du temps d'apprentissage</li>
+          </ul>
+          <%= link_to("S'inscrire",new_user_registration_path, class:"w-100 btn btn-outline-secondary btn-lg", method:"get") %>
+        </div>
+      </div>
+    </div>
+</section>
+
+
