@@ -1,0 +1,191 @@
+<!-- PARTIE BANNER -->
+<%= render "layouts/partials/hero_banner_index" %>
+
+<!-- PARTIE PRESENTATION -->
+  <section class="container">
+    <h1 class="orange_underline">Learn’it, en quelques mots</h1>
+    
+    <div class="row justify-content-between py-5">
+      <div class="col-lg-3 col-md-6">
+        <div class="card-1">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-book-half fs-1"></i>
+            </div>
+            <h5 class="card-title">Apprentissage</h5>
+            <p class="card-text">Apprendre par la pratique, de manière concise et explicite grâce à des expériences d’apprentissage d’autres membres de la communauté.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-2">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-broadcast-pin fs-1"></i>
+            </div>
+            <h5 class="card-title">Communauté</h5>
+            <p class="card-text">Une communauté bienveillante pour échanger et communiquer à tout moment, avec d’autres passionnés ayant les mêmes envies d’apprendre que vous.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-3">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-chat-heart fs-1"></i>
+            </div>  
+            <h5 class="card-title">Accessible à tous</h5>
+            <p class="card-text">Nos modules sont accessibles gratuitement et quand vous le souhaitez. Chaque membre peut y contribuer à sa manière et partager ses connaissances.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="card-4">
+          <div class="card-body">
+            <div class="fs-6 mb-3">
+              <i class="bi bi-bookmark-star-fill fs-1"></i>
+            </div>
+            <h5 class="card-title">Mise en relation</h5>
+            <p class="card-text">Des cursus recensant les meilleures ressources d’internet, soigneusement sélectionnées par nos membres.</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+
+<!-- PARTIE CURSUS -->
+  <section class="container">
+    <h1 class="orange_underline">Nos cursus</h1>
+      <div class="row justify-content-between py-5">
+        <%if @themes%>
+          <% @themes.each do |theme| %>
+            <%= render 'layouts/partials/theme_card', theme: theme %>
+          <%end%>
+        <%else%>
+          <div class="col-md-6 alert alert-danger">
+            <p>Erreur de chargement des thèmes</p>
+          </div>
+        <%end%>
+      </div>
+      <div class="row pb-5">
+        <%= link_to themes_path, class: "nav-link" do%>
+          <i class="bi bi-chevron-double-right text-secondary fs-3"></i>
+          <span class="text-deep_blue fs-4 align-center ms-3">Découvrez toutes nos thématiques</span> 
+        <%end%>
+      </div>
+  </section>
+
+<!-- PARTIE TARIF -->
+<section class="row justify-content-around mb-5 bg-light_pulpit">
+  <div class="col-5 mx-5 my-5 p-5">
+    <p class="display-5">Chez <span class="text-secondary"><b>LearnIt!</b></span>, aucune <br/> mauvaise surprise !</p>
+    <p class="display-6">Un forfait mensuel <br/> pour toutes nos ressources</p>
+  </div>
+  <div class="col-5 mx-5 my-5 p-5"> 
+    <div class="d-flex flex-column bg-primary p-3">
+      <div>
+        <p class="h4 text-center p-3 text-light">Tarif unique</p>
+
+        <p class="display-5 text-center mt-2 pt-3 p-2 text-light"><b>399€ <small class="h6 text-light">/an</b></small></p>
+        <p class="text-center mt-2 pb-2 text-secondary">Sans engagement !</p>
+      </div>
+      <div class="d-flex justify-content-center mp-1 p-3">
+        <%= link_to("Se connecter",new_user_session_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"get") %>
+      </div>
+    </div> 
+  </div>
+</section>
+
+<!-- PARTIE AVIS -->
+<section class="container">
+  <h2 class="orange_underline">Témoignages d'alumnis</h2>
+
+	<div class="row py-5">
+
+	<div class="col-lg-4">
+		  <div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student_01.jpg", alt:"Pic Student 01", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Jérôme Pichenot</b></span>
+						</div>
+					</div>
+          <p class="mt-4">
+            Une plateforme au-delà de mes attentes. C'est intuitif, riche, complet, je recommande !
+					</p>
+				</div>
+		  </div>
+	</div>
+
+  <div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student_04.jpg", alt:"Pic Student 04", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Alexandra Ginova</b></span>
+						</div>
+					</div>
+          <p class="mt-4 line-height-1_8">
+            Grâce à LearnIt! j'ai pu aboutir ma reconversion professionnelle avec succès tout en faisant mes propres choix à mon rythme.
+					</p>
+				</div>
+			</div>
+	</div>
+
+  <div class="col-lg-4">
+			<div class="card">
+				<div class="card-body">
+					<div class="block-author">
+						<div class="author-image">
+              <%= image_tag("student_05.jpg", alt:"Pic Student 05", class:"rounded", width:"60") %>
+						</div>
+						<div class="author-info">
+							<span class="d-block mt-1"><b>Carl Philip</b></span>
+						</div>
+					</div>
+          <p class="mt-4">
+            Très cool ! Je suis mes choix préférés quand je le souhaite et en plus c'est pas cher.
+					</p>
+				</div>
+			</div>
+  </div>
+</section>
+
+<!-- PARTIE PARTNERS -->
+<section class="row justify-content-between my-5">
+  <div class="text-center">
+    <h2 class="orange_underline">Ils reconnaissent la qualité de nos formations</h2>
+    <div class="d-flex justify-content-around mt-5">
+      <div class="col-md-2">
+        <%= link_to "https://about.google/", :target => "_blank" do %>
+          <%= image_tag("google_logo.png", alt:"Logo Google", width: "200") %>
+        <%end%>
+      </div>
+      <div class="col-md-2">
+        <%= link_to "https://www.thehackingproject.org/", :target => "_blank" do %>
+          <%= image_tag("thp_logo.png", alt:"Logo THP", width: "200") %>
+        <%end%>
+      </div>
+      <div class="col-md-2">
+        <%= link_to "https://www.investprep.fr/", :target => "_blank" do %>
+          <%= image_tag("Invest_Prep_logo.png", alt:"Formation Private Equity Invest Prep", width: "200") %>
+        <%end%>
+      </div>
+      <div class="col-md-2">
+        <%= link_to "https://fr.wikipedia.org/wiki/Mammouth_(hypermarch%C3%A9)", :target => "_blank" do %>
+          <%= image_tag("mammouth_logo.png", alt:"Logo Mammouth", width: "200") %>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</section>
