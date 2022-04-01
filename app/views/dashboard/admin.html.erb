@@ -1,8 +1,12 @@
 <!-- Headings ~ Full width with 1 unique column -->
 <section class=" col text-center py-3">
   <h3 class="orange_underline">
-    <% my_hello = current_user.gender == "Female" ? "la bienvenue sur votre dashboard, Madame" : "le bienvenu sur votre dashboard, Monsieur" %>
-    Soyez <%= my_hello %> <%= current_user.first_name.capitalize %> <%= current_user.last_name.upcase %> !
+    <% if !current_user.gender.nil? && !current_user.first_name.nil? && !current_user.last_name.nil? %>
+      <% my_hello = current_user.gender == "Female" ? "la bienvenue sur votre dashboard [Administrateur], Madame" : "le bienvenu sur votre dashboard [Administratrice], Monsieur" %>
+      Soyez <%= my_hello %> <%= current_user.first_name.capitalize %> <%= current_user.last_name.upcase %> !
+    <% else %>
+      Bienvenue sur le dashboard [Administrateur] de LearnIt! !
+    <% end %>
   </h3>
 </section>
 
@@ -10,7 +14,7 @@
 <section class="row justify-content-between g-0">
   
   <!-- Card 1/5 ~ Members' info (Users with roles "student(0)", "mentor(1)" or "admin(2)" -->
-  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1">
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 me-2">
     <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
       <div class="text-start fw-bold">
         <i class="bi bi-person-hearts fs-4"></i>
@@ -44,7 +48,7 @@
   </div>
 
   <!-- Card 2/5 ~ Pedagogical objects' info (Themes, Chapters, Courses, Quizzes...) -->
-  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1">
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
     <div class="d-flex justify-content-between rounded-top bg-primary text-secondary p-2">
       <div class="text-start fw-bold">
         <i class="bi bi-mortarboard-fill fs-4"></i>
@@ -80,7 +84,7 @@
   </div>
 
   <!-- Card 3/5 ~ Consolidated completion info by themes / chapters / courses -->
-  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1">
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
     <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
       <div class="text-start fw-bold">
         <i class="bi bi-bar-chart-line-fill fs-4"></i>
@@ -111,7 +115,7 @@
   </div>
 
   <!-- Card 4/5 ~ Groups' infos -->
-  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1">
+  <div class="d-flex flex-column col-2 rounded shadow border g-0 p-1 mx-2">
     <div class="d-flex justify-content-between rounded-top bg-primary text-secondary p-2">
       <div class="text-start fw-bold">
         <i class="bi bi-people-fill fs-5"></i><i class="bi bi-people-fill fs-4 ms-n1"></i>
@@ -147,7 +151,7 @@
 
   <!-- Card 5/5 ~ Extract of the 5-10 most recent Private Messages -->
   <!-- [BONUS] Hence still faking it as of March 30 but should / could be part of LearnIt! in the future -->
-  <div class="d-flex flex-column col-3 rounded shadow border g-0 p-1">
+  <div class="d-flex flex-column col rounded shadow border g-0 p-1 ms-2">
     <div class="d-flex justify-content-between rounded-top bg-secondary text-primary p-2">
       <div class="text-start fw-bold">
         <i class="bi bi-chat-right-text fs-4"></i>
@@ -214,10 +218,10 @@
 <section class="row justify-content-around g-0">
   
   <!-- Users' list -->
-  <div class="col-6 rounded bg-light shadow border g-0 p-1" >
+  <div class="col-9 rounded bg-light shadow border g-0 p-1 me-2">
     <div class="btn-group">
       <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Classer par...
+        Filtrer par...
       </button>
       <ul class="dropdown-menu">
         <li class="dropdown-item">IDs</li>
@@ -269,18 +273,62 @@
   </div>  
 
   <!-- Themes' list-->
-  <div class="col rounded bg-light shadow border g-0 p-1">
+  <div class="col rounded bg-light shadow border g-0 p-1 ms-2">
+    <h2 class="orange_underline text-center">Thèmes</h2>
     <div class="accordion" id="themeAccordion">
-      <% Theme.all.each do |my_theme| %>
+      <% Theme.order(:id).all.each do |my_theme| %>
       <div class="accordion-item">
-        <h2 class="accordion-header" id="heading<%=my_theme.id%>">
-          <button class="accordion-button bg-secondary text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<%=my_theme.id%>" aria-expanded="<%=(my_theme.id == Theme.first.id).to_s%>" aria-controls="collapse<%=my_theme.id%>">
+        <h2 class="accordion-header" id="themeheading<%=my_theme.id%>">
+          <button class="accordion-button bg-secondary text-primary" type="button" data-bs-toggle="collapse" data-bs-target="#themecollapse<%=my_theme.id%>" aria-expanded="<%=(my_theme.id == Theme.first.id).to_s%>" aria-controls="themecollapse<%=my_theme.id%>">
             <%= my_theme.title%>
           </button>
         </h2>
-        <div id="collapse<%=my_theme.id%>" class="accordion-collapse collapse" aria-labelledby="heading<%=my_theme.id%>" data-bs-parent="#themeAccordion">
+        <div id="themecollapse<%=my_theme.id%>" class="accordion-collapse collapse" aria-labelledby="themeheading<%=my_theme.id%>" data-bs-parent="#themeAccordion">
           <div class="accordion-body">
-            <%= my_theme.content %>
+            <p><%= my_theme.content %></p>
+            <div class="row justify-content-between text-center">
+              <div class="col-4">
+                <%= link_to("Editer", edit_theme_path(my_theme.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+              </div>
+              <div class="col-4">
+                <%= link_to("Créer", new_theme_path, class:"btn btn-sm btn-light_pulpit") %>
+              </div>
+              <div class="col-4">
+                <%= link_to("Suppr.", theme_path(my_theme.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le thème '#{my_theme.title} (n° #{my_theme.id})' ?" }, class:"btn btn-sm btn-danger") %>
+              </div>
+            </div>
+            <hr/>
+            <% if Chapter.order(:id).where(theme_id:my_theme.id).count > 0%>
+            <div class="accordion" id="chapterAccordion">
+              <% Chapter.order(:id).where(theme_id:my_theme.id).each do |my_chapter| %>
+              <div class="accordion-item">
+                <h4 class="accordion-header" id="chapterheading<%=my_chapter.id%>">
+                <button class="accordion-button bg-primary text-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#chaptercollapse<%=my_chapter.id%>" aria-expanded="<%=(my_chapter.id == Chapter.order(:id).where(theme_id:my_theme.id).first.id).to_s%>" aria-controls="chaptercollapse<%=my_chapter.id%>">
+                  <%= my_chapter.title%>
+                </button>
+                </h4>
+              </div>
+              <div id="chaptercollapse<%=my_chapter.id%>" class="accordion-collapse collapse" aria-labelledby="chapterheading<%=my_chapter.id%>" data-bs-parent="#chapterAccordion">
+                <div class="accordion-body">
+                  <p><%= my_chapter.content %></p>
+                  <div class="row justify-content-between">
+                    <div class="col-4">
+                      <%= link_to("Editer", edit_chapter_path(my_chapter.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+                    </div>
+                    <div class="col-4">
+                      <%= link_to("Créer", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %>
+                    </div>
+                    <div class="col-4">
+                      <%= link_to("Suppr.", chapter_path(my_chapter.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le chapitre '#{my_chapter.title} (n° #{my_chapter.id})' ?" }, class:"btn btn-sm btn-danger") %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </div>
+            <% else %>
+            <p class="fst-italic text-center">Pas encore de chapitre dans ce thème... <%= link_to("Créer le premier chapitre", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %></p>
+            <% end %>
           </div>
         </div>
       </div>

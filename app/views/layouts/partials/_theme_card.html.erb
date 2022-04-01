@@ -18,13 +18,13 @@
       <% if current_user.what_role? == "admin" %>
       <div class="row justify-content-between">
         <div class="col-4">
-          <%= link_to("Edit", edit_theme_path(theme.id), class:"btn btn-sm btn-secondary") %>
+          <%= link_to("Editer", edit_theme_path(theme.id), class:"btn btn-sm btn-blue_violet") %>
         </div>
         <div class="col-4">
-          <%= link_to("Add", new_theme_path, class:"btn btn-sm btn-blue_violet") %>
+          <%= link_to("Créer", new_theme_path, class:"btn btn-sm btn-light_pulpit") %>
         </div>
         <div class="col-4">
-          <%= link_to("Suppress", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
+          <%= link_to("Suppr.", theme_path(theme.id), method: "delete", class:"btn btn-sm btn-danger") %>
         </div>
       </div>
       <% else %>
