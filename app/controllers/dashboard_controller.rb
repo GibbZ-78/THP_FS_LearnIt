@@ -28,10 +28,15 @@ class DashboardController < ApplicationController
   def student
     @id = current_user.id
     @themes_du_user = UserThemeSeason.where(user_id: @id)
+
+    @uts = UserThemeSeason.find_by(season_id: params[:season], theme_id: params[:theme], user_id: @id)
     
+    # Affiche le user role mentor de la table UsersGroup
+    @mentor = UsersGroup.where(group_id: Group.where(season_id: params[:season], user_id: @id))
+
     respond_to do |format|
       format.html { }
-      format.js { }
+      format.js { @uts }
     end
   end
 
