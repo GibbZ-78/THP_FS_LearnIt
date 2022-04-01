@@ -5,32 +5,33 @@ Learn it est une plateforme de formation en ligne pluridisciplinaire axée sur l
 
 2. Typologies et parcours utilisateurs
 Learn it réunit 4 typologies d’utilisateurs :
-•	Les "visiteurs" pourront naviguer sur la « landing page » et découvrir notre proposition de valeur avant de se laisser séduire par l’offre. Ils peuvent également entrer en contact avec l’administrateur via un formulaire hébergé sur le site.
-•	Les "apprenants" se sont déjà inscrits pour une période de 1 an et bénéficient des contenus pédagogiques de la plateforme. Ces derniers sont structurés en thèmes > chapitres > cours.
-•	Les "mentors" accompagnent des groupes d’apprenants dans leur formation. Ils ont un rôle de référant pédagogique.
-•	Un(e) administrateur(trice) accédera à l’ensemble des informations des cours, apprenants, mentors depuis son dashboard qui lui offrira une vision complète des statistiques de Learn it.
+*	Les « visiteurs » peuvent naviguer sur la « landing page » et découvrir notre proposition de valeur avant de se laisser séduire par l’offre. Ils peuvent également entrer en contact avec l’administrateur via un formulaire hébergé sur le site.
+*	Les "apprenants" s’inscrivent pour une période de 1 an et bénéficient ainsi des contenus pédagogiques de la plateforme. Ces derniers sont structurés en thèmes > chapitres > cours.
+* Les "mentors" accompagnent des groupes d’apprenants dans leur formation. Ils ont un rôle de référant pédagogique.
+* Un(e) administrateur(trice) accède à l’ensemble des informations des cours, apprenants, mentors depuis son dashboard qui lui offre une vision complète des statistiques de Learn it.
 
 Zoom sur le parcours d'un(e) "apprenant(e)" :
-•	Découverte, via la landing page présentant les différentes thématiques de cours, l’offre pédagogique, les conditions tarifaires, des témoignages et autres preuves sociales, etc.
-•	Inscription annuelle : paiement via Stripe pour bénéficier d’un accès à l’ensemble de la plateforme sur une période de 1 an.
-•	Réception d’un mail de confirmation d’inscription
-•	Connexion au "dashboard / tableau de bord" de l'apprenant(e), l'utilisateur(trice) peut :
-o	S'inscrire aux cursus qui l'intéressent
-o	Visualiser les cursus auxquels il est déjà inscrit
-o	Passer des quiz en fin de cours (évaluation à compléter à la fin de certains cours)
-o	Suivre sa progression depuis son dashboard.
+* Découverte, via la page d’accueil présentant une sélection de thématiques de cours, l’offre pédagogique, les conditions tarifaires, des témoignages et autres preuves sociales, etc.
+* Inscription annuelle : paiement via Stripe pour bénéficier d’un accès à l’ensemble de la plateforme sur une période de 1 an.
+* Réception d’un mail de confirmation d’inscription
+* Connexion au "dashboard / tableau de bord" de l'apprenant(e), l'utilisateur(trice) peut :
+  * S'inscrire aux cursus qui l'intéressent
+  * Visualiser les cursus auxquels il est déjà inscrit
+  * Suivre sa progression depuis son dashboard.
 
 3. Les fonctionnalités mises en place 
-•	une "landing page" accessible à tous et présentée plus haut
-•	un système d’inscription/connexion adossé à Devise et Stripe
-•	l’instanciation des 4 typologies d’utilisateurs
-•	une boucle de mails adressés à l’administrateur et au nouvel inscrit
-•	des cours structurés de façon arborescente (modules > chapitres > cours / quiz)
-•	des sessions / promotions d’apprenants qui favorisent le travail en équipe (les cours démarrent à une date fixée)
-•	un formulaire de contact pour permettre à tout visiteur d’échanger avec l’administrateur
-•	un tableau de bord pour :
-o	l'apprenant qui résume les modules suivis, les cours réussis, l'accès au catalogue de formation
-o	l'administrateur qui centralise des informations et chiffres en lien avec les apprenants, les chiffres de participation par modules
+*	une page d’accueil accessible à tous et présentée plus haut
+*	un système d’inscription/connexion adossé à Devise et Stripe
+*	une gestion des 4 typologies d’utilisateurs (présentés plus haut)
+*	une boucle de mails adressés à l’administrateur et au nouvel inscrit
+*	des cours structurés de façon arborescente (thèmes > chapitres > cours)
+*	des promotions d’apprenants qui favorisent le travail en équipe (les cours démarrent et s’achèvent à des dates fixées)
+*	un formulaire de contact pour permettre à tout visiteur d’échanger avec l’administrateur
+*	un tableau de bord pour :
+    * l'apprenant qui résume les modules suivis, les cours réussis, l'accès au catalogue de formation
+    *	le mentor qui présente les groupes accompagnés
+    *	l'administrateur qui centralise des informations et chiffres en lien avec les apprenants, les chiffres de participation par modules
+
 
 # Environnement Technique
 
