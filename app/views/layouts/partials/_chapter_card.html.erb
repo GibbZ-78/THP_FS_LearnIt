@@ -6,7 +6,7 @@
       <%= image_tag(chapter_logo, alt: "Logo du chapitre", class: "img-fluid") rescue image_tag("SVG_Logo.svg", alt: "Logo du chapitre", class: "img-fluid") %>
     </div>
     <div class="col-md-5 col-lg-6 d-flex flex-column align-items-start">
-      <p class="text-light fw-bold"><%= my_chapter.title %></p>
+      <p class="text-light fw-bold"><%= my_chapter.title %> (<%= my_chapter.id %>)</p>
       <p class="text-light fst-italic"><%= my_chapter.content %></p>
     </div>
   </div>

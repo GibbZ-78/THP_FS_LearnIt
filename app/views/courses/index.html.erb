@@ -5,7 +5,7 @@
 
 <hr>
 
-<section class="row justify-content-between g-0">
+<section class="row justify-content-center g-0">
   <% @courses.all.each do |one_course| %>
     <%= render("layouts/partials/course_card", my_course: one_course) %>
   <% end %>
