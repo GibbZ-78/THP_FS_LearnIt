@@ -13,7 +13,8 @@ class ThemesController < ApplicationController
   end
 
   def create
-    @theme.create(clean_params)
+    Theme.create(clean_params)
+    redirect_to dashboard_admin_path
   end
 
   def edit

@@ -274,6 +274,7 @@
 
   <!-- Themes' list-->
   <div class="col rounded bg-light shadow border g-0 p-1 ms-2">
+    <h2 class="orange_underline text-center">Thèmes</h2>
     <div class="accordion" id="themeAccordion">
       <% Theme.order(:id).all.each do |my_theme| %>
       <div class="accordion-item">
@@ -285,12 +286,15 @@
         <div id="themecollapse<%=my_theme.id%>" class="accordion-collapse collapse" aria-labelledby="themeheading<%=my_theme.id%>" data-bs-parent="#themeAccordion">
           <div class="accordion-body">
             <p><%= my_theme.content %></p>
-            <div class="row justify-content-between">
-              <div class="col-5">
-                <%= link_to("Editer thème", edit_theme_path(my_theme.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+            <div class="row justify-content-between text-center">
+              <div class="col-4">
+                <%= link_to("Editer", edit_theme_path(my_theme.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
               </div>
-              <div class="col-5">
-                <%= link_to("Suppr. thème", theme_path(my_theme.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le thème '#{my_theme.title} (n° #{my_theme.id})' ?" }, class:"btn btn-sm btn-danger") %>
+              <div class="col-4">
+                <%= link_to("Créer", new_theme_path, class:"btn btn-sm btn-light_pulpit") %>
+              </div>
+              <div class="col-4">
+                <%= link_to("Suppr.", theme_path(my_theme.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le thème '#{my_theme.title} (n° #{my_theme.id})' ?" }, class:"btn btn-sm btn-danger") %>
               </div>
             </div>
             <hr/>
@@ -308,11 +312,14 @@
                 <div class="accordion-body">
                   <p><%= my_chapter.content %></p>
                   <div class="row justify-content-between">
-                    <div class="col-5">
-                      <%= link_to("Editer chap.", edit_chapter_path(my_chapter.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
+                    <div class="col-4">
+                      <%= link_to("Editer", edit_chapter_path(my_chapter.id), method:"get", class:"btn btn-sm btn-blue_violet") %>
                     </div>
-                    <div class="col-5">
-                      <%= link_to("Suppr. chap.", chapter_path(my_chapter.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le chapitre '#{my_chapter.title} (n° #{my_chapter.id})' ?" }, class:"btn btn-sm btn-danger") %>
+                    <div class="col-4">
+                      <%= link_to("Créer", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %>
+                    </div>
+                    <div class="col-4">
+                      <%= link_to("Suppr.", chapter_path(my_chapter.id), method:"delete", data: { confirm: "Etes-vous sûr(e) de vouloir effacer le chapitre '#{my_chapter.title} (n° #{my_chapter.id})' ?" }, class:"btn btn-sm btn-danger") %>
                     </div>
                   </div>
                 </div>
@@ -320,7 +327,7 @@
               <% end %>
             </div>
             <% else %>
-            <p class="fst-italic">Pas encore de cours dans ce chapitre...</p>
+            <p class="fst-italic text-center">Pas encore de chapitre dans ce thème... <%= link_to("Créer le premier chapitre", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %></p>
             <% end %>
           </div>
         </div>

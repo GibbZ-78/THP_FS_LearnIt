@@ -13,7 +13,8 @@ class ChaptersController < ApplicationController
   end
 
   def create
-    @chapter.create(clean_params)
+    Chapter.create(clean_params)
+    redirect_to dashboard_admin_path
   end
 
   def edit
@@ -35,7 +36,7 @@ class ChaptersController < ApplicationController
   private
 
   def clean_params
-    params.require(:chapter).permit(:title, :content)
+    params.require(:chapter).permit(:title, :content, :theme_id)
   end
 
 end

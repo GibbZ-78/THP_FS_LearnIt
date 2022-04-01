@@ -10,19 +10,35 @@ class CoursesController < ApplicationController
     @course_theme = @course.chapter.theme  #YR Probably another unsuccessful attempt to display every courses and chapters in the side_bar
   end
 
-  #def edit
-  #end
+  def new
+    @course = Course.new
+  end
 
-  #def update
-  #end
+  def create
+    Course.create(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def new
-  #end
+  def edit
+    @course = Course.find(params[:id]) 
+  end
 
-  #def create
-  #end
+  def update
+    @course = Course.find(params[:id])
+    @course.update(clean_params)
+    redirect_to dashboard_admin_path
+  end
 
-  #def destroy
-  #end
+  def destroy
+    @course = Course.find(params[:id])
+    @course.destroy
+    redirect_to dashboard_admin_path
+  end
+
+  private
+
+  def clean_params
+    params.require(:chapter).permit(:title, :content, :chapter_id)
+  end
 
 end
