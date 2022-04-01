@@ -4,7 +4,7 @@ class CheckoutController < ApplicationController
   def create
     puts "INFO - Stripe - Starting payment funnel"
     @user = current_user
-    puts "  > User: #{@user.email} #{@user.role} (user ID: #{@user.id})" #first_name and last_name
+    puts "  > User: #{@user.email} #{@user.role} (user ID: #{@user.id})"
     @total = 399.00
     puts "  > Total amount: #{@total}"
     puts "  > Success URL: #{checkout_success_url} (eq. #{checkout_success_path})"
@@ -16,7 +16,7 @@ class CheckoutController < ApplicationController
       # payment_method: @payment_method,
       line_items: [
         {
-          name: "Learnit Payment of #{@user.email} #{@user.role}", #first_name and last_name
+          name: "Learnit Payment of #{@user.email} #{@user.role}",
           amount: (@total*100).to_i,
           currency: "eur",
           quantity: 1
@@ -37,8 +37,6 @@ class CheckoutController < ApplicationController
   # Error encountered hence suppressing STRIPE payment tunnel
   def cancel
     puts "INFO - Stripe - Starting 'cancel' method"
-    #@session = Stripe::Checkout::Session.retrieve(params[:session_id])
-    #@payment_intent = Stripe::PaymentIntent.retrieve(@session.payment_intent)
     puts "INFO - Stripe - Closing 'cancel' method"
   end
 
