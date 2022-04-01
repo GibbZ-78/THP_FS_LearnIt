@@ -7,6 +7,9 @@
 <!-- Page Content -->
   <section class="col-10">
     <%= render "layouts/partials/course_content", course: @course %>
-    <%= link_to("Cours suivant",root_path, class:"btn btn-warning") %>
+    <% if !@next_course.nil? %>
+      <%= link_to("Cours suivant", course_path(@next_course.id), class:"btn btn-warning") %>
+    <% end %>
+
   </section>
 </div>
