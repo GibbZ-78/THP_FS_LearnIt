@@ -1,3 +1,42 @@
-<section class="row-cols-1 bg-primary" style="height: 150px"> <!-- entete -->
-  
+<section class="row-cols-1 bg-primary pt-3">
+  <div class="container bg-light border border-primary rounded-bottom">
+    <div class="row">
+      <div class="col-md-3" id="">
+        <h5>Thème</h5>
+        <div id="theme_infos">
+          <ul class="list-unstyled">
+            <li class=""><%= Theme.find(uts_infos.theme_id).title %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3" id="">
+        <h5>Saison</h5>
+        <div id="season_infos">
+          <ul class="list-unstyled">
+            <li class=""><%= Season.find(uts_infos.season_id).name %></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3" id="">
+        <h5>Mon groupe de travail</h5>
+        <div id="group_infos">
+          <% members = UsersGroup.where(group_id: Group.where(season_id: uts_infos.season_id))%>
+          <ul class="list-unstyled">
+            <% members.each do |member| %>
+              <li class=""><%= User.find(member.user_id).first_name%> <%=User.find(member.user_id).last_name.upcase %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-3" id="">
+        <h5>Mon mentor</h5>
+        <div id="mentor_infos">
+          <%mentor = Group.find(uts_infos.season_id)%>
+          <ul class="list-unstyled">
+            <li class=""><%= User.find(mentor.user_id).first_name %> <%= User.find(mentor.user_id).last_name.upcase %></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
