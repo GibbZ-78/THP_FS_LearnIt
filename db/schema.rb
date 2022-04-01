@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 2022_03_28_123314) do
   create_table "groups", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "season_id"
+    t.bigint "seasons_id"
     t.bigint "user_id"
-    t.index ["season_id"], name: "index_groups_on_season_id"
+    t.index ["seasons_id"], name: "index_groups_on_seasons_id"
     t.index ["user_id"], name: "index_groups_on_user_id"
   end
 
@@ -152,7 +152,7 @@ ActiveRecord::Schema.define(version: 2022_03_28_123314) do
     t.index ["user_theme_season_chapter_id"], name: "index_utsc_courses_on_user_theme_season_chapter_id"
   end
 
-  add_foreign_key "groups", "seasons"
+  add_foreign_key "groups", "seasons", column: "seasons_id"
   add_foreign_key "groups", "users"
   add_foreign_key "memberships", "users"
   add_foreign_key "seasons", "themes"
