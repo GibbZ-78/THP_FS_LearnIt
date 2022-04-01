@@ -1,12 +1,12 @@
-<div>
-<!-- Sidebar --> 
-  <aside class="fixed-right">
-    <%= render "layouts/partials/side_bar_courses" %>
-  </aside>
+<section class="row justify-content-center g-0">
+  <%= render("layouts/partials/hero_banner_learnit") %>
+  <h2 class="orange_underline text-center">NOS COURS</h2>
+</section>
 
-<!-- Page Content -->
-  <section>
-    <%= render "layouts/partials/course_content" %>
-    <%= link_to("Cours suivant",root_path, class:"btn btn-warning") %>
-  </section>
-</div>
+<hr>
+
+<section class="row justify-content-between g-0">
+  <% @courses.all.each do |one_course| %>
+    <%= render("layouts/partials/course_card", my_course: one_course) %>
+  <% end %>
+</section>
