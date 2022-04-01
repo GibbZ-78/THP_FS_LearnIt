@@ -1,17 +1,17 @@
-# LEARN IT! 
+# [LEARN IT!](https://welearnit.herokuapp.com/)
 
 1. Présentation
 Learn it est une plateforme de formation en ligne pluridisciplinaire axée sur le travail de groupe et le mentorat.
 
-2. Typologie et parcours utilisateurs
+2. Typologies et parcours utilisateurs
 Learn it réunit 4 typologies d’utilisateurs :
-•	Les visiteurs pourront naviguer sur la « landing page » et découvrir notre proposition de valeur avant de se laisser séduire par l’offre. Ils peuvent également entrer en contact avec l’administrateur via un formulaire hébergé sur le site.
+•	Les "visiteurs" pourront naviguer sur la « landing page » et découvrir notre proposition de valeur avant de se laisser séduire par l’offre. Ils peuvent également entrer en contact avec l’administrateur via un formulaire hébergé sur le site.
 •	Les "apprenants" se sont déjà inscrits pour une période de 1 an et bénéficient des contenus pédagogiques de la plateforme. Ces derniers sont structurés en thèmes > chapitres > cours.
 •	Les "mentors" accompagnent des groupes d’apprenants dans leur formation. Ils ont un rôle de référant pédagogique.
 •	Un(e) administrateur(trice) accédera à l’ensemble des informations des cours, apprenants, mentors depuis son dashboard qui lui offrira une vision complète des statistiques de Learn it.
 
 Zoom sur le parcours d'un(e) "apprenant(e)" :
-•	Découverte, via la landing page présentant les différents thématiques de cours, l’offre pédagogique, les conditions tarifaires, des témoignages et autres preuves sociales, etc.
+•	Découverte, via la landing page présentant les différentes thématiques de cours, l’offre pédagogique, les conditions tarifaires, des témoignages et autres preuves sociales, etc.
 •	Inscription annuelle : paiement via Stripe pour bénéficier d’un accès à l’ensemble de la plateforme sur une période de 1 an.
 •	Réception d’un mail de confirmation d’inscription
 •	Connexion au "dashboard / tableau de bord" de l'apprenant(e), l'utilisateur(trice) peut :
