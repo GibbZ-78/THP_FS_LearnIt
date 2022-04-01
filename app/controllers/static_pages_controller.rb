@@ -41,4 +41,9 @@ class StaticPagesController < ApplicationController
   def fees
   end
 
+  def contact_form
+    clean_params= params.permit(:first_name, :last_name, :email, :object, :message)
+    UserMailer.contact_email(params[:first_name], params[:last_name], params[:email], params[:object], params[:message]).deliver_now
+    redirect_to contact_path
+  end
 end
