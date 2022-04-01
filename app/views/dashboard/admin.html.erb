@@ -2,10 +2,10 @@
 <section class=" col text-center py-3">
   <h3 class="orange_underline">
     <% if !current_user.gender.nil? && !current_user.first_name.nil? && !current_user.last_name.nil? %>
-      <% my_hello = current_user.gender == "Female" ? "la bienvenue sur votre dashboard, Madame" : "le bienvenu sur votre dashboard, Monsieur" %>
+      <% my_hello = current_user.gender == "Female" ? "la bienvenue sur votre dashboard [Administrateur], Madame" : "le bienvenu sur votre dashboard [Administratrice], Monsieur" %>
       Soyez <%= my_hello %> <%= current_user.first_name.capitalize %> <%= current_user.last_name.upcase %> !
     <% else %>
-      Bienvenue sur le dashboard "Administrateur" de LearnIt! !
+      Bienvenue sur le dashboard [Administrateur] de LearnIt! !
     <% end %>
   </h3>
 </section>
