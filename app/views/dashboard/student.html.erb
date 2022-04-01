@@ -6,6 +6,11 @@
 
 <section class="container mb-5">
   <h3 class="mb-5 orange_underline">Vos cursus</h3>
+
+  <% if flash.any? %>
+    <%= render 'layouts/partials/flash' %>
+  <% end %>
+
   <div class="row justify-content-between">
     <%if @themes_du_user.length == 0 %>
       <%= render 'layouts/partials/add_theme_card' %>
