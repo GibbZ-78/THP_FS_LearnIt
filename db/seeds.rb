@@ -482,9 +482,78 @@ puts
 puts "Thank you for your patience ;-)"
 puts
 
-######################
-#                    #
-#      LEARN IT !    #
-#  End of seed file  #
-#                    #
-######################
+##############################
+#                            #
+#          LEARN IT !        #
+#  End of initial seed file  #
+#                            #
+##############################
+
+
+  #########################
+ #                         #
+#   CREATION OF DEMO USER   #
+ #                         #
+  #########################
+
+  p "*"*20
+  p "Creating the demo student"
+  p "*"*20
+
+  User.create(first_name: "Wilfried", 
+    last_name: "PAILLOT", 
+    password: "THP2022", 
+    email: "student_demo@yopmail.com", 
+    birthdate: Faker::Date.birthday(min_age: 38, max_age: 39),
+    gender: "Male",
+    role:0)
+
+  p "*"*20
+  print "Added student: "
+  p "#{User.last.first_name} #{User.last.last_name.upcase}"
+  p "*"*20
+
+  p "*"*20
+  p "Adding the demo student in actual season's Web Development "
+  p "*"*20
+  UserSeason.create(user_id: User.last.id, season_id: 4)
+  UserThemeSeason.create(user_id: User.last.id, season_id: 4, theme_id: 1, completion_rate: rand(0..100))
+  my_theme = Theme.find(3)
+  my_season = Season.find(4)
+  my_chapters = Chapter.where(theme_id:my_theme)
+
+  my_chapters.each do |my_chapter|
+  UserThemeSeasonChapter.create(user_theme_season_id: UserThemeSeason.last.id, chapter_id:my_chapter.id, completion_rate: rand(0..100))
+  end
+
+  UserThemeSeasonChapter.all.each do |my_utsc|
+    my_courses = Course.where(chapter_id:my_utsc.chapter_id)
+    my_uts = UserThemeSeason.find(my_utsc.user_theme_season_id)
+    my_season = Season.find(my_uts.season_id)
+    my_courses.each do |my_course|
+      UtscCourse.create(user_theme_season_chapter_id: my_utsc.id, course_id:my_course.id, completed: 0)
+    end
+  end
+
+  p "*"*20
+  p "Adding the demo student in actual season's Human resources "
+  p "*"*20
+  
+  UserSeason.create(user_id: User.last.id, season_id: 9)
+  UserThemeSeason.create(user_id: User.last.id, season_id: 9, theme_id: 3, completion_rate: 0) 
+    my_theme = Theme.find(3)
+    my_season = Season.find(9)
+
+    my_chapters = Chapter.where(theme_id:my_theme)
+    my_chapters.each do |my_chapter|
+    UserThemeSeasonChapter.create(user_theme_season_id: UserThemeSeason.last.id, chapter_id:my_chapter.id, completion_rate: 0)
+    end
+
+    UserThemeSeasonChapter.all.each do |my_utsc|
+      my_courses = Course.where(chapter_id:my_utsc.chapter_id)
+      my_uts = UserThemeSeason.find(my_utsc.user_theme_season_id)
+      my_season = Season.find(my_uts.season_id)
+      my_courses.each do |my_course|
+        UtscCourse.create(user_theme_season_chapter_id: my_utsc.id, course_id:my_course.id, completed: 0)
+      end
+    end
