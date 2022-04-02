@@ -1,6 +1,6 @@
 class ThemesController < ApplicationController
   
-  before_action :require_admin, except: :index
+  before_action :require_admin, except: [:index, :show] 
 
   def index
     @themes = Theme.all
