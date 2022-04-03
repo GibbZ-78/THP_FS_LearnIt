@@ -116,16 +116,30 @@
   </div>
   <div class="col-5 mx-5 my-5 p-5"> 
     <div class="d-flex flex-column bg-primary p-3">
+      <%if !user_signed_in? %>
       <div>
-        <p class="h4 text-center p-3 text-light">Tarif unique</p>
+        <p class="text-center p-3 text-light">Tarif unique</p>
 
         <p class="display-5 text-center mt-2 pt-3 p-2 text-light"><b>399€ <small class="h6 text-light">/an</b></small></p>
         <p class="text-center mt-2 pb-2 text-secondary">Sans engagement !</p>
       </div>
       <div class="d-flex justify-content-center mp-1 p-3">
-        <%= link_to("Se connecter",new_user_session_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"get") %>
+        <%= link_to("S'inscrire",new_user_session_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"get") %>
       </div>
-    </div> 
+    </div>
+    <%else %>
+      <div>
+        <p class="text-center p-3 text-light fs-3"><%= current_user.first_name %></p>
+        <p class="text-center mt-2 pb-2 text-light fs-4">Vous faites déjà parti de nos membres &#127881;</p>
+        <p class="text-center mt-2 pb-2 text-light fs-4">Votre acccès illimité à <span class="orange_underline">toutes</span> nos ressources est actif jusqu'au :</p>
+        <% end_sub_date = Membership.find_by(user_id: current_user.id).subscription_date+365.days %>
+        <p class="display-5 text-center mt-2 pt-3 p-2 text-light"><b><%= end_sub_date.strftime('%d/%m/%Y') %></p>
+      </div>
+      <div class="d-flex justify-content-center mp-1 p-3">
+        <%= button_to("Renouveller", root_path , class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light",disabled: true, method:"get") %>
+      </div>
+    </div>
+      <%end %>
   </div>
 </section>
 
