@@ -127,7 +127,7 @@
         <%= link_to("S'inscrire",new_user_session_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"get") %>
       </div>
     </div>
-    <%else %>
+    <%elsif current_user.role != "admin"%>
       <div>
         <p class="text-center p-3 text-light fs-3"><%= current_user.first_name %></p>
         <p class="text-center mt-2 pb-2 text-light fs-4">Vous faites déjà parti de nos membres &#127881;</p>
@@ -139,7 +139,12 @@
         <%= link_to_if(Date.today == end_sub_date-7.days, "Renouveller", checkout_create_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light", method:"post", remote: true) %>
       </div>
     </div>
-      <%end %>
+    <%else %>
+      <p class="text-center mt-2 pb-2 text-light fs-4">Bienvenue <%= current_user.last_name.upcase %> <%= current_user.first_name.capitalize %></p>
+      <div class="d-flex justify-content-center mp-1 p-3">
+        <%= link_to("Dashboard", dashboard_index_path, class:"btn btn-outline-secondary btn-lg px-4 me-md-2 text-light") %>
+      </div>
+    <%end %>
   </div>
 </section>
 
