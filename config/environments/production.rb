@@ -88,7 +88,7 @@ Rails.application.configure do
 
   # BEGIN - LearnIt! specific SMTP and mailer configuration
   # Default URL options added after devise:install
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'welearnit.herokuapp.com' }
 
   # Activate mailing error raising (default status is muted with default value 'false')
   config.action_mailer.raise_delivery_errors = true
