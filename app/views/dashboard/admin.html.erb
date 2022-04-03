@@ -248,10 +248,26 @@
           <% Membership.where(user_id:my_user.id).each do |my_membership| %>
           <tr>
             <td><%= my_user.id %></td>
-            <td><%= my_user.last_name.upcase %></td>
-            <td><%= my_user.first_name.capitalize %></td>
-            <td><%= my_user.gender.capitalize %></td>
-            <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
+            <%if !my_user.last_name.nil? %>
+              <td><%= my_user.last_name.upcase %></td>
+            <%else %>
+              <td>Non renseigné</td>
+            <%end%>
+            <%if !my_user.first_name.nil? %>
+              <td><%= my_user.first_name.capitalize %></td>
+            <%else %>
+              <td>Non renseigné</td>
+            <%end%>
+            <%if !my_user.gender.nil? %>
+              <td><%= my_user.gender.capitalize %></td>
+            <%else %>
+              <td>Non renseigné</td>
+            <%end%>
+            <%if !my_user.birthdate.nil? %>
+              <td><%= my_user.birthdate.strftime('%d.%m.%Y') %></td>
+            <%else %>
+            <td>Non renseigné</td>
+            <%end%>
             <td><%= my_user.role %></td>
             <td>
               <%= my_membership.subscription_date.strftime('%d.%m.%Y') %>
