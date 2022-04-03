@@ -4,7 +4,7 @@
         <h2 class="fs-3 mt-5">Développez vos compétences dans un grand nombre de domaines</h2>
         <h1 class="display-2 fw-bold text-primary my-3">Learn it</h1>
         <div class="mt-4 gap-2 d-sm-flex justify-content-sm-center">
-          <% if !user_signed_in? # The button below will appear only if current_user is NOT connected %>
+          <% if !user_signed_in? %>
           <%= link_to("S'inscrire",new_user_registration_path,class:"btn btn-warning px-4") %>
           <% end %>
         </div>
