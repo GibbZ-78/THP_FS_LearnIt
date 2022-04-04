@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
   private
 
   def clean_params
-    params.require(:chapter).permit(:title, :content, :chapter_id)
+    params.require(:course).permit(:title, :content, :chapter_id)
   end
 
   def require_admin
