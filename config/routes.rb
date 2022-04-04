@@ -6,6 +6,7 @@ root to: 'static_pages#home'
   scope "/dashboard" do
     get "admin", to: "dashboard#admin", as: "dashboard_admin"
     get "student", to: "dashboard#student", as: "dashboard_student"
+    get "mentor", to: "dashboard#mentor", as: "dashboard_mentor"
   end
   
   resources :dashboard, :themes, :chapters, :courses, :quizzes, :question_answers, :groups, :seasons, :memberships, :user_theme_seasons
