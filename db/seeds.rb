@@ -518,7 +518,7 @@ puts
   p "*"*20
   UserSeason.create(user_id: User.last.id, season_id: 4)
   UserThemeSeason.create(user_id: User.last.id, season_id: 4, theme_id: 1, completion_rate: rand(0..100))
-  my_theme = Theme.find(3)
+  my_theme = Theme.find(1)
   my_season = Season.find(4)
   my_chapters = Chapter.where(theme_id:my_theme)
 
