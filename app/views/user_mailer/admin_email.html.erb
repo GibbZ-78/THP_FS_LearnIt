@@ -8,10 +8,13 @@
     <p>Excellente nouvelle : LearnIt! compte un(e) nouvel(le) inscrit(e) en la personne de :</p>
     <p>
       <ul>
-        <li><%= @user.gender == "Female" ? "Madame" : "Monsieur" %> <%= @user.first_name.capitalize %> <%= @user.last_name.upcase %></li>
         <li>E-mail : <%= @user.email %></li>
+        <%if !@user.gender.nil? && !@user.first_name && !@user.last_name %>
+        <li><%= @user.gender == "Female" ? "Madame" : "Monsieur" %> <%= @user.first_name.capitalize %> <%= @user.last_name.upcase %></li>
+        <%end %>
+        <%if !@user.birthdate.nil? %>
         <li>Date de naissance : <%= @user.birthdate.strftime("%d %B %Y") %></li>
-        <li>Role: <%= @user.what_role? %></li>
+        <%end %>
       </ul>
     </p>
     <p>Bonne journée</p>

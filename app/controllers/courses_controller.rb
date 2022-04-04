@@ -1,5 +1,7 @@
 class CoursesController < ApplicationController
   
+  before_action :require_admin, except: :show
+
   def index
     @courses = Course.all
   end
@@ -8,8 +10,6 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     @course_chapter = @course.chapter
     @courses = Course.where(chapter_id:@course_chapter.id)
-    #@courses_of_the_same_chapter = Course.where(chapter_id:@courses.chapter_id) #test
-    #@next_course = Course.where(chapter_id:@courses.chapter_id, course_id:(@course.id +1)) #test for the button "next course"
     @next_course = Course.find_by_id(params[:id].to_i + 1)
   end
 
@@ -41,7 +41,13 @@ class CoursesController < ApplicationController
   private
 
   def clean_params
-    params.require(:chapter).permit(:title, :content, :chapter_id)
+    params.require(:course).permit(:title, :content, :chapter_id)
+  end
+
+  def require_admin
+    if !user_signed_in? || current_user.what_role? != "admin"
+      redirect_to root_path
+    end
   end
 
 end

@@ -1,0 +1,19 @@
+<!-- Course horyzontal card used in "chapters" only (local var: my_chapter) -->
+<div class="col-5 bg-primary rounded-start ms-2 my-2 p-1">
+  <p class="text-light fw-bold"><%= my_course.title %> (<%= my_course.id %>)</p>
+  <p class="text-light fst-italic"><%= my_course.content %></p>
+</div>
+</div>
+<div class="col-2 bg-secondary text-center rounded-end me-2 my-2 p-1">
+  <div class="row">
+    <div class="col-4">
+      <%= link_to("Editer", edit_course_path(my_course.id), class:"btn btn-sm btn-blue_violet") %>
+    </div>
+    <div class="col-4">
+      <%= link_to("Créer", new_course_path, class:"btn btn-sm btn-light_pulpit") %>
+    </div>
+      <div class="col-4">
+        <%= link_to("Suppr.", course_path(my_course.id), method: "delete", class:"btn btn-sm btn-danger", data: {confirm: "Etes-vous certain(e) de vouloir effacer le cours n°#{my_course.id} : '#{my_course.title}' ?"}) %>
+    </div>
+  </div>
+</div>

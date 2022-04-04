@@ -1,5 +1,7 @@
 class ThemesController < ApplicationController
   
+  before_action :require_admin, except: [:index, :show] 
+
   def index
     @themes = Theme.all
   end
@@ -37,6 +39,12 @@ class ThemesController < ApplicationController
 
   def clean_params
     params.require(:theme).permit(:title, :content)
+  end
+
+  def require_admin
+    if !user_signed_in? || current_user.what_role? != "admin"
+      redirect_to root_path
+    end
   end
 
 end

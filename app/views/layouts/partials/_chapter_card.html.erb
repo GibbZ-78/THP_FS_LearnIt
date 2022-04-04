@@ -1,19 +1,26 @@
-<%# Chapter horyzontal card %>
-<div class="col-10 bg-primary">
-  <div class="row">
+<!-- Chapter horyzontal card used in "chapters" only (local var: my_chapter) -->
+<div class="col-5 bg-primary rounded-start ms-2 my-2 p-1">
+  <div class="row p-2">
     <div class="col-md-4 col-lg-3">
-      <div class="image p-5">
-        <%= image_tag('chapters_logos/ruby_logo.svg', alt: "Background chapter card", class: 'img-fluid') %>
-      </div>
+      <% chapter_logo = "chapters_logos/#{my_chapter.theme.title}/chapter_#{my_chapter.id}.svg"  %>
+      <%= image_tag(chapter_logo, alt: "Logo du chapitre", class: "img-fluid") rescue image_tag("SVG_Logo.svg", alt: "Logo du chapitre", class: "img-fluid") %>
     </div>
-    <div class="col-auto d-flex justify-content-center align-items-center">
-      <p class="text-light"><%= 'Lorem ipsum sanctum cacatum' || theme.chapter.content %></p>
+    <div class="col-md-5 col-lg-6 d-flex flex-column align-items-start">
+      <p class="text-light fw-bold"><%= my_chapter.title %> (<%= my_chapter.id %>)</p>
+      <p class="text-light fst-italic"><%= my_chapter.content %></p>
     </div>
   </div>
 </div>
-<div class="col-2">
-  <div class="d-flex flex-column justify-content-center align-items-center bg-neon_carrot h-100">
-    <p class="fs-1"><%= '80%' || chapter.completion %></p>
-    <%= link_to 'Poursuivre', root_path, class: 'text-deep_blue' %>
+<div class="col-2 bg-secondary text-center rounded-end me-2 my-2 p-1">
+  <div class="row d-flex flex-column">
+    <div class="col-4 ms-3 me-auto mt-3 mb-auto">
+      <%= link_to("Editer", edit_chapter_path(my_chapter.id), class:"btn btn-sm btn-blue_violet") %>
+    </div>
+    <div class="col-4 mx-auto my-auto">
+      <%= link_to("Créer", new_chapter_path, class:"btn btn-sm btn-light_pulpit") %>
+    </div>
+      <div class="col-4 ms-auto me-3 mt-auto mb-3">
+        <%= link_to("Suppr.", chapter_path(my_chapter.id), method: "delete", class:"btn btn-sm btn-danger", data: {confirm: "Etes-vous certain(e) de vouloir effacer le chapitre n°#{my_chapter.id} : '#{my_chapter.title}' ?"}) %>
+    </div>
   </div>
 </div>
